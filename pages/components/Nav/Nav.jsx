@@ -47,23 +47,6 @@ const Nav = () => {
             sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
           />
 
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            CodeNice
-          </Typography>
-
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -96,27 +79,40 @@ const Nav = () => {
             >
               {/**PAGES */}
               {pages.map((page, pageIndex) => (
-                <Button onClick={handleCloseNav} key={page + pageIndex}>
+                <MenuItem onClick={handleCloseNav} key={page + pageIndex}>
                   <Link href={page?.pageLink}>
                     <h1>{page?.pageLabel}</h1>
                   </Link>
-                </Button>
+                </MenuItem>
               ))}
             </Menu>
           </Box>
-
           <IntegrationInstructionsIcon
             sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
           />
+          <Typography
+            variant="h5"
+            noWrap
+            component="a"
+            href=""
+            sx={{
+              flexGrow: 1,
+              fontFamily: "monospace",
+              fontWeight: 700,
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
+            CodeNice
+          </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {/**PAGES */}
             {pages.map((page, pageIndex) => (
-              <Button onClick={handleCloseNav} key={page + pageIndex}>
-                <Link href={page?.pageLink}>
-                  <h1>{page?.pageLabel}</h1>
-                </Link>
-              </Button>
+              <Link href={page?.pageLink} key={page + pageIndex}>
+                <Typography textAlign="center"> {page?.pageLabel} </Typography>
+              </Link>
             ))}
           </Box>
 
@@ -197,7 +193,11 @@ const userSettings = [
     settingLabel: "Dashboard",
   },
   {
-    settingLink: "/LogOut",
+    settingLink: "/logout",
     settingLabel: "LogOut",
+  },
+  {
+    settingLink: "/login",
+    settingLabel: "LogIn",
   },
 ];
