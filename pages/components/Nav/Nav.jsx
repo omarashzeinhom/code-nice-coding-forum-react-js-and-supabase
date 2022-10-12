@@ -14,31 +14,77 @@ import {
   Button,
   Tooltip,
   MenuItem,
-  AdbIcon,
 } from "@mui/material";
+
+import AdbIcon from '@mui/icons-material/Adb';
+
 
 const Nav = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenNav = (event) => {
-    setAnchorElNav(event.currentTarget);
+    setAnchorElNav(event?.currentTarget);
   };
 
-  const handleCloseNav = (event) => {
+  const handleCloseNav = () => {
     setAnchorElNav(null);
   };
 
+const handleOpenUserSettings = (event) => {
+  setAnchorElUser(event?.currentTarget);
+}
+
+const handleCloseUserSettings = () => {
+  setAnchorElUser(null);
+};
+
+
   return (
-    <nav>
-      <ul>
-        {pages.map((page, pageIndex) => (
+    
+    <AppBar positon="static">
+<Container maxWidth="xl">
+  <Toolbar disableGutters>
+  <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            LOGO
+          </Typography>
+
+  {pages.map((page, pageIndex) => (
           <MenuItem key={page + pageIndex} onClick={handleCloseNav}>
             <Link href={page?.pageLink}>{page?.pageLabel}</Link>
           </MenuItem>
         ))}
-      </ul>
-    </nav>
+
+  </Toolbar>
+
+
+
+</Container>
+
+
+
+
+
+
+
+    </AppBar>
+      
+      
   );
 };
 
