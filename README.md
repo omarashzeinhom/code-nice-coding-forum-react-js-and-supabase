@@ -10,9 +10,9 @@
  
 ```yarn add neo4j-driver```
 
-2. [express-openid-connect - Express middleware to protect web applications using OpenID Connect.](https://yarnpkg.com/package/express-openid-connect)
+1. [nextAuth.js Neo4j getting Started](https://next-auth.js.org/adapters/neo4j)
 
-```yarn add express-openid-connect```
+```yarn add next-auth @next-auth/neo4j-adapter neo4j-driver```
 
 
 
@@ -35,3 +35,15 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 ###### BackEnd
 
 1. [Authentication - Neo4j Docs](https://neo4j.com/docs/graphql-manual/current/auth/authentication/)
+
+
+###### Front End 
+1.[MUI React - Default installation](https://mui.com/material-ui/getting-started/installation/#default-installation)
+```
+yarn add @mui/material @emotion/react @emotion/styled
+```
+2. [When and how to use tree-shaking? in  MUI](https://mui.com/material-ui/guides/minimizing-bundle-size/)
+```
+//tree-shaking
+import { Button, TextField } from '@mui/material';
+```

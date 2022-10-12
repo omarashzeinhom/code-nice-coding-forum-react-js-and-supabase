@@ -5,9 +5,9 @@ const NeoDriver = () => {
   (async () => {
     const neo4j = require("neo4j-driver");
 
-    const uri = "neo4j+s://37ffa9a6.databases.neo4j.io";
+    const uri = "neo4j+s://231269a5.databases.neo4j.io";
     const user = "neo4j";
-    const password = "K0mV6KX8O-wLFUoOq9y-jpEcfKaqGbzKFpvx0g8WLCk";
+    const password = "JmYc0lPIN3yoEEk4LB6G-r4q_n7LsPVjsoYJ8xm0P-g";
 
     // To learn more about the driver: https://neo4j.com/docs/javascript-manual/current/client-applications/#js-driver-driver-object
     const driver = neo4j.driver(uri, neo4j.auth.basic(user, password));
@@ -29,7 +29,7 @@ const NeoDriver = () => {
 
     async function createFriendship(driver, person1Name, person2Name) {
       // To learn more about sessions: https://neo4j.com/docs/javascript-manual/current/session-api/
-      const session = driver.session({ database: "Instance1" });
+      const session = driver.session({ database: "Instance01" });
 
       try {
         // To learn more about the Cypher syntax, see: https://neo4j.com/docs/cypher-manual/current/
@@ -60,10 +60,8 @@ const NeoDriver = () => {
       }
     }
 
-
-
-/**** findPerson Start */
-async function findPerson(driver, personName) {
+    /**** findPerson Start */
+    async function findPerson(driver, personName) {
       const session = driver.session({ database: "neo4j" });
 
       try {
@@ -85,17 +83,13 @@ async function findPerson(driver, personName) {
       }
     }
   })();
-/**** findPerson End */
+  /**** findPerson End */
 
-
-
-
-
-
-
-
-
-  return <div>Neo4j</div>;
+  return (
+    <div>
+      <h1> Neo4j and Next Auth Login</h1>
+    </div>
+  );
 };
 
 export default NeoDriver;
