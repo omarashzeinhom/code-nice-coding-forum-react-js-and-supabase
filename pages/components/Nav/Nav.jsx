@@ -46,14 +46,13 @@ const Nav = () => {
           <IntegrationInstructionsIcon
             sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
           />
+
           <Typography
             variant="h5"
             noWrap
             component="a"
             href=""
             sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
               flexGrow: 1,
               fontFamily: "monospace",
               fontWeight: 700,
@@ -109,24 +108,6 @@ const Nav = () => {
           <IntegrationInstructionsIcon
             sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
           />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            LOGO
-          </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             {/**PAGES */}
@@ -162,16 +143,15 @@ const Nav = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserSettings}
             >
-              {userSettings.map((setting, settingsIndex) => {
+              {userSettings.map((setting, settingsIndex) => (
                 <MenuItem key={settingsIndex + setting}>
                   <Link href={setting?.settingLink}>
                     <Typography textAlign="center">
                       {setting?.settingLabel}
                     </Typography>
                   </Link>
-                  {setting?.settingLabel}
-                </MenuItem>;
-              })}
+                </MenuItem>
+              ))}
             </Menu>
           </Box>
         </Toolbar>
