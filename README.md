@@ -6,14 +6,9 @@
 
 ### Packages Installed
 
-1. [neo4j-driver]()
-
-```yarn add neo4j-driver```
-
+1. [neo4j-driver](https://yarnpkg.com/package/neo4j-driver)```yarn add neo4j-driver```
 2. [nextAuth.js -Neo4j getting Started](https://next-auth.js.org/adapters/neo4j)
-3. [nextAuth.js -Models](https://next-auth.js.org/adapters/models)
-
-```yarn add next-auth @next-auth/neo4j-adapter neo4j-driver```
+3. [nextAuth.js -Models](https://next-auth.js.org/adapters/models)```yarn add next-auth @next-auth/neo4j-adapter neo4j-driver```
 
 How TO IMPLMENT NEXT AUTH
 
@@ -115,4 +110,5 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 5. [The sx prop  - MUI Docs](https://mui.com/system/getting-started/the-sx-prop/)
 6. [Grid - MUI Docs](https://mui.com/material-ui/react-grid/)
 7. [Button- MUI Docs](https://mui.com/material-ui/react-button/#main-content)
-8. [Fragments - React Docs](https://reactjs.org/docs/fragments.html)
+8. [Card - MUI Docs](https://mui.com/material-ui/react-card/)
+9. [Fragments - React Docs](https://reactjs.org/docs/fragments.html)

@@ -8,8 +8,7 @@ export default function Home() {
       <Header />
       <Nav />
       <NeoDriver />
-      <br/>
-      <hr/>
+    
 <QCards/>
     </div>
   );

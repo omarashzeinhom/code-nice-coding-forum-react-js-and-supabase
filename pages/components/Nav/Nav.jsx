@@ -96,7 +96,7 @@ export default function Nav() {
             variant="h5"
             noWrap
             component="a"
-            href=""
+            href="//"
             sx={{
               flexGrow: 1,
               fontFamily: "monospace",
@@ -109,11 +109,11 @@ export default function Nav() {
             CodeNice
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+          <Box sx={{ flexGrow: 1, letterSpacing: 4, m: 1, display: { xs: "none", md: "flex" } }} >
             {/**PAGES */}
             {pages.map((page, pageIndex) => (
               <Link href={page?.pageLink} key={page + pageIndex}>
-                <Typography textAlign="center"> {page?.pageLabel} </Typography>
+          {page?.pageLabel} 
               </Link>
             ))}
           </Box>
