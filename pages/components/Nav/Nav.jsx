@@ -107,7 +107,7 @@ export default function Nav() {
               textDecoration: "none",
             }}
           >
-            CodeNice
+            NiceCode
           </Typography>
 
           <Box
