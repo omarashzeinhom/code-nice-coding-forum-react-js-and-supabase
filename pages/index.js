@@ -1,4 +1,4 @@
-import { Header, NeoDriver, Nav, QCards, Footer } from "./components";
+import { Header,  Nav, QCards, Footer } from "./components";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
@@ -6,7 +6,6 @@ export default function Home() {
     <div className={styles.container}>
       <Header />
       <Nav />
-      <NeoDriver />
       <h1>Welcome to Code Nice!</h1>
       <QCards />
       <Footer />

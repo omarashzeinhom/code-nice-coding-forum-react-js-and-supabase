@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import Fingerprint from "@mui/icons-material/Fingerprint";
-import { useSession, signIn, signOut, getProviders } from "next-auth/react";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { grey } from "@mui/material/colors";
 
@@ -10,12 +9,7 @@ import {
   Box,
   Button,
   CssBaseline,
-  Container,
-  Divider,
-  FormGroup,
-  FormControl,
   FormControlLabel,
-  Input,
   Grid,
   Typography,
   Link,
@@ -26,7 +20,6 @@ import {
 
 import GitHubIcon from "@mui/icons-material/GitHub";
 
-import credentialSignIn from "../../auth/crededentials-signin";
 
 //EXAMPLE SYNTAX
 const colorGrey = grey["900"];
@@ -53,7 +46,6 @@ export default function LoginForm({ providers }) {
   const [password, setPassword] = React.useState();
   const [email, setEmail] = React.useState();
 
-  const { data: session } = useSession();
 
   const handleLogin = () => {};
 
@@ -63,13 +55,13 @@ export default function LoginForm({ providers }) {
   }, [email, password]);
 
   console.log(email, password);
-  if (session) {
+  if (!"test") {
     return (
       <>
         <Typography textAlign="center">
-          User Signed In as: {session?.user?.email}
+          User Signed In as: 
         </Typography>
-        <Button color="error" onClick={() => signOut()}>
+        <Button color="error" >
           Do you Want to Sign Out?
         </Button>
       </>
@@ -148,12 +140,6 @@ export default function LoginForm({ providers }) {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
                 //CREDENTIALS SIGN IN WITH CSRF TOKENS
-                onClick={() =>
-                  signIn("credentials", {
-                    username: `${email}`,
-                    password: `${password}`,
-                  })
-                }
               >
                 LOG IN
                 <Fingerprint />

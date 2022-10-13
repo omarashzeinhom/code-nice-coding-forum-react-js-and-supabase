@@ -6,81 +6,16 @@
 
 ### Packages Installed
 
-1. [neo4j-driver](https://yarnpkg.com/package/neo4j-driver)```yarn add neo4j-driver```
-2. [nextAuth.js -Neo4j getting Started](https://next-auth.js.org/adapters/neo4j)
-3. [nextAuth.js -Models](https://next-auth.js.org/adapters/models)```yarn add next-auth @next-auth/neo4j-adapter neo4j-driver```
-
-How TO IMPLMENT NEXT AUTH
+1. [Quickstart - Supabase js](https://supabase.com/docs/guides/with-nextjs)
+2. [@supabase/supabase-js](<https://yarnpkg.com/package/@supabase/supabase-js>
 
 ```js
-//Server - in /pages/api/auth/[...nextauth].js
-import NextAuth from 'next-auth'
-import AppleProvider from 'next-auth/providers/apple'
-import FacebookProvider from 'next-auth/providers/facebook'
-import GoogleProvider from 'next-auth/providers/google'
-import EmailProvider from 'next-auth/providers/email'
-
-export default NextAuth({
-  providers: [
-    // OAuth authentication providers...
-    AppleProvider({
-      clientId: process.env.APPLE_ID,
-      clientSecret: process.env.APPLE_SECRET
-    }),
-    FacebookProvider({
-      clientId: process.env.FACEBOOK_ID,
-      clientSecret: process.env.FACEBOOK_SECRET
-    }),
-    GoogleProvider({
-      clientId: process.env.GOOGLE_ID,
-      clientSecret: process.env.GOOGLE_SECRET
-    }),
-    // Passwordless / email sign in
-    EmailProvider({
-      server: process.env.MAIL_SERVER,
-      from: 'NextAuth.js <no-reply@example.com>'
-    }),
-  ]
-})
-```
-
-```js
-///Client APP pages/_app.jsx
-import { SessionProvider } from "next-auth/react"
-
-export default function App({
-  Component, pageProps: { session, ...pageProps }
-}) {
-  return (
-    <SessionProvider session={session}>
-      <Component {...pageProps}/>
-    </SessionProvider>
-  )
-}
-```
-
-```js
-//in index.js
-import { useSession, signIn, signOut } from "next-auth/react"
-
-export default function Component() {
-  const { data: session } = useSession()
-  if(session) {
-    return <>
-      Signed in as {session.user.email} <br/>
-      <button onClick={() => signOut()}>Sign out</button>
-    </>
-  }
-  return <>
-    Not signed in <br/>
-    <button onClick={() => signIn()}>Sign in</button>
-  </>
-}
+yarn add @supabase/supabase-js
 ```
 
 #### Handling Errors
 
-1. [MISSING_NEXTAUTH_API_ROUTE_ERROR - Next Auth js Docs](https://next-auth.js.org/errors#missing_nextauth_api_route_error)
+1.
 
 #### Learn More
 
@@ -114,6 +49,6 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 9. [Fragments - React Docs](https://reactjs.org/docs/fragments.html)
 10. [Colors - MUI Docs](https://mui.com/material-ui/customization/color/#main-content)
 
-
 ###### Various Docs
+
 1. [Encryption Key Generator](https://www.allkeysgenerator.com/Random/Security-Encryption-Key-Generator.aspx)
