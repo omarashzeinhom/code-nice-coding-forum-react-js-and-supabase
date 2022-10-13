@@ -10,15 +10,16 @@ import {
   Menu,
   Container,
   Avatar,
-  Button,
   Tooltip,
   MenuItem,
 } from "@mui/material";
 
+import {LoginState} from "../index"
+
 import IntegrationInstructionsIcon from "@mui/icons-material/IntegrationInstructions";
 import MenuIcon from "@mui/icons-material/Menu";
 
-const Nav = () => {
+export default function Nav() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -38,6 +39,7 @@ const Nav = () => {
   const handleCloseUserSettings = () => {
     setAnchorElUser(null);
   };
+
 
   return (
     <AppBar positon="static">
@@ -148,15 +150,17 @@ const Nav = () => {
                   </Link>
                 </MenuItem>
               ))}
+              <LoginState/>
             </Menu>
           </Box>
         </Toolbar>
       </Container>
     </AppBar>
   );
+
+
 };
 
-export default Nav;
 
 const pages = [
   {
@@ -171,12 +175,7 @@ const pages = [
     pageLabel: "Questions",
   },
 
-  {
-    // Object 1
-    pageLink: "/login",
-    pageLabel: "Login",
-    // ADD IF STATEMENT TO CHECK IF USER IS LOGGED OR NOR  { user != null && ()}
-  },
+
 ];
 
 const userSettings = [
@@ -192,12 +191,5 @@ const userSettings = [
     settingLink: "/dashboard",
     settingLabel: "Dashboard",
   },
-  {
-    settingLink: "/logout",
-    settingLabel: "LogOut",
-  },
-  {
-    settingLink: "/login",
-    settingLabel: "LogIn",
-  },
+  
 ];

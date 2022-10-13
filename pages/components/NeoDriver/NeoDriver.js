@@ -5,7 +5,8 @@ const NeoDriver = () => {
   (async () => {
     const neo4j = require("neo4j-driver");
 
-    const uri = "neo4j+s://37ffa9a6.databases.neo4j.io";
+    const uri = "neo4j://37ffa9a6.databases.neo4j.io";
+    //PROD CHG URI TO ENCRYPTED     const uri = 'neo4j+s:'
 
     const user = "neo4j";
 
@@ -89,7 +90,7 @@ const NeoDriver = () => {
 
   return (
     <div>
-      <h1> Neo4j and Next Auth Login</h1>
+      <h1> Neo4j</h1>
     </div>
   );
 };
