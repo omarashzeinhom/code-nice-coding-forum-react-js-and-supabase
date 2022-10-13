@@ -2,21 +2,52 @@ import React, { useEffect, useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import Fingerprint from "@mui/icons-material/Fingerprint";
 import { useSession, signIn, signOut, getProviders } from "next-auth/react";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { grey } from "@mui/material/colors";
 
 import {
-  FormControl,
-  Input,
+  Avatar,
+  Box,
   Button,
+  CssBaseline,
+  Container,
   Divider,
   FormGroup,
-  Container,
+  FormControl,
+  FormControlLabel,
+  Input,
+  Grid,
   Typography,
+  Link,
+  TextField,
+  Checkbox,
+  Paper,
 } from "@mui/material";
-import LogoutIcon from "@mui/icons-material/Logout";
-import LoginIcon from "@mui/icons-material/Login";
+
 import GitHubIcon from "@mui/icons-material/GitHub";
 
-import credentialSignIn from "../../auth/cred-signin";
+import credentialSignIn from "../../auth/crededentials-signin";
+
+//EXAMPLE SYNTAX
+const colorGrey = grey["900"];
+
+function Copyright(props) {
+  return (
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Copyright © "}
+      <Link color="inherit" href="https://mui.com/">
+        Your Website
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
+}
 
 export default function LoginForm({ providers }) {
   const [password, setPassword] = React.useState();
@@ -45,51 +76,115 @@ export default function LoginForm({ providers }) {
     );
   } else {
     return (
-      <Container fixed maxWidth="sm">
-        <FormGroup>
-          <h1> Login In Here!</h1>
-
-          <FormControl>
-            <label>Email</label>
-            <Input
-              name="cx_email"
-              type="text"
-              color={"primary"}
-              onChange={(event) => setEmail(event.target.value)}
-            />
-          </FormControl>
-
-          <Divider color={"primary"} />
-          <FormControl>
-            <label>Password</label>
-            <Input
-              name="cx_password"
-              type="password"
-              onChange={(event) => setPassword(event.target.value)}
-            />
-            <IconButton
-              aria-label="fingerprint"
-              color="primary"
-              type="submit"
-              variant="outlined"
-              //CREDENTIALS SIGN IN WITH CSRF TOKENS
-              onClick={() =>
-                signIn("credentials", {
-                  username: `${email}`,
-                  password: `${ password}`,
-                })
-              }
+      <Grid container component="main" sx={{ height: "100vh" }}>
+        <CssBaseline />
+        <Grid
+          item
+          xs={false}
+          sm={4}
+          md={7}
+          sx={{
+            backgroundImage: "url(https://source.unsplash.com/random)",
+            backgroundRepeat: "no-repeat",
+            backgroundColor: (t) =>
+              t.palette.mode === "light"
+                ? t.palette.grey[50]
+                : t.palette.grey[900],
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+          <Box
+            sx={{
+              my: 8,
+              mx: 4,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign in
+            </Typography>
+            <Box
+              component="form"
+              noValidate
+              onSubmit={handleLogin}
+              sx={{ mt: 1 }}
             >
-              <Fingerprint />
-              Login
-            </IconButton>
-            <IconButton>
-              Login with
-              <GitHubIcon />
-            </IconButton>
-          </FormControl>
-        </FormGroup>
-      </Container>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                onChange={(event) => setEmail(event.target.value)}
+                autoFocus
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                onChange={(event) => setPassword(event.target.value)}
+                id="password"
+                autoComplete="current-password"
+              />
+              <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                //CREDENTIALS SIGN IN WITH CSRF TOKENS
+                onClick={() =>
+                  signIn("credentials", {
+                    username: `${email}`,
+                    password: `${password}`,
+                  })
+                }
+              >
+                LOG IN
+                <Fingerprint />
+              </Button>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color={"secondary"}
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Login with
+                <GitHubIcon />
+              </Button>
+              <Grid container>
+                <Grid item xs>
+                  <Link href="#" variant="body2">
+                    Forgot password?
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Link href="#" variant="body2">
+                    {"Don't have an account? Sign Up"}
+                  </Link>
+                </Grid>
+              </Grid>
+              <Copyright sx={{ mt: 5 }} />
+            </Box>
+          </Box>
+        </Grid>
+      </Grid>
     );
   }
 }

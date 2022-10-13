@@ -12,9 +12,11 @@ const driver = neo4j.driver(
 const neo4jsession = driver.session();
 
 export default NextAuth({
-  // https://next-auth.js.org/configuration/providers
   providers: [
-    //add providers here for nextAuth github , facebook, linkedin.
+    //ADD providers here for nextAuth github , facebook, linkedin.
+    // LINK : https://next-auth.js.org/configuration/providers
+    //TODO ADD GITHUB LOGIN
+    //TODO ADD GOOGLE LOGIN
   ],
   adapter: Neo4jAdapter(neo4jsession),
   pages: {

@@ -189,5 +189,6 @@ const qcardsContent = [
     postDescription:
       "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
     postCategory: "neo4j",
+    postCategoryLink: "",
   },
 ];

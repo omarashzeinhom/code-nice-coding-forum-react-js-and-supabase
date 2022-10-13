@@ -1,15 +1,16 @@
 import React from "react";
-import { BottomNavigation } from '@mui/material';
+import { BottomNavigation, Typography } from '@mui/material';
 
 
 export default function Footer(){
 
     return (
-<BottomNavigation>
-    <small>
+<BottomNavigation showlabel={"false"}>
+    <Typography>
     @OMAR ZEINHOM AKA ANDGOEDU 2023
 
-    </small>
+    </Typography>
+
 </BottomNavigation>
     )
 }

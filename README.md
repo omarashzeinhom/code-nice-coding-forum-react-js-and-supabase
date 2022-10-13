@@ -112,3 +112,8 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 7. [Button- MUI Docs](https://mui.com/material-ui/react-button/#main-content)
 8. [Card - MUI Docs](https://mui.com/material-ui/react-card/)
 9. [Fragments - React Docs](https://reactjs.org/docs/fragments.html)
+10. [Colors - MUI Docs](https://mui.com/material-ui/customization/color/#main-content)
+
+
+###### Various Docs
+1. [Encryption Key Generator](https://www.allkeysgenerator.com/Random/Security-Encryption-Key-Generator.aspx)
