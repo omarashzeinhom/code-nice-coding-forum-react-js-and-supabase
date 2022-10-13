@@ -65,7 +65,7 @@ const NeoDriver = () => {
 
     /**** findPerson Start */
     async function findPerson(driver, personName) {
-      const session = driver.session({ database: "neo4j" });
+      const session = driver.session({ database: "Instance01" });
 
       try {
         const readQuery = `MATCH (p:Person)

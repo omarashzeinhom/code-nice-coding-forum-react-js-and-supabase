@@ -16,6 +16,8 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import LoginIcon from "@mui/icons-material/Login";
 import GitHubIcon from "@mui/icons-material/GitHub";
 
+import credentialSignIn from "../../auth/cred-signin";
+
 export default function LoginForm({ providers }) {
   const [password, setPassword] = React.useState();
   const [email, setEmail] = React.useState();
@@ -73,8 +75,8 @@ export default function LoginForm({ providers }) {
               //CREDENTIALS SIGN IN WITH CSRF TOKENS
               onClick={() =>
                 signIn("credentials", {
-                  username: { email },
-                  password: { password },
+                  username: `${email}`,
+                  password: `${ password}`,
                 })
               }
             >
