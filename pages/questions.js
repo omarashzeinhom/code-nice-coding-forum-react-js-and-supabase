@@ -1,5 +1,5 @@
 import React from 'react'
-import { Header, Nav, NeoDriver, QCards } from './components'
+import { Header, Nav, NeoDriver, QCards,Footer } from './components'
 import styles from "../styles/Home.module.css";
 
 const Questions = () => {
@@ -12,6 +12,7 @@ const Questions = () => {
       <br/>
       <hr/>
       <QCards/>
+      <Footer/>
     </div>
   )
 }

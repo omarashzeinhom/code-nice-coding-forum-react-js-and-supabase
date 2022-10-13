@@ -52,7 +52,7 @@ export default function QCards() {
     <Grid container spacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
       {qcardsContent.map((qcard, index) => (
         <React.Fragment key={qcard + index}>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={12} md={6} lg={4} xl={4}>
             <Item sx={{ maxWidth: 345 }}>
               <CardHeader
                 avatar={

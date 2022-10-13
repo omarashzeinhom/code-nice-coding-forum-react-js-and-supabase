@@ -96,7 +96,7 @@ export default function Nav() {
             variant="h5"
             noWrap
             component="a"
-            href="//"
+            href="/"
             sx={{
               flexGrow: 1,
               fontFamily: "monospace",
@@ -165,15 +165,17 @@ export default function Nav() {
 const pages = [
   {
     // Object 1
-    pageLink: "/",
-    pageLabel: "Home",
-  },
-
-  {
-    // Object 1
     pageLink: "/questions",
     pageLabel: "Questions",
   },
+
+  {
+    // Object 2
+    pageLink: "/tags",
+    pageLabel: "Tags",
+  },
+
+
 
 
 ];

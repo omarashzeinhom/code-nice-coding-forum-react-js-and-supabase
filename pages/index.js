@@ -1,6 +1,5 @@
-import Image from "next/image";
+import { Header, NeoDriver, Nav, QCards, Footer } from "./components";
 import styles from "../styles/Home.module.css";
-import { Header, NeoDriver, Nav, QCards } from "./components";
 
 export default function Home() {
   return (
@@ -8,8 +7,9 @@ export default function Home() {
       <Header />
       <Nav />
       <NeoDriver />
-    
-<QCards/>
+      <h1>Welcome to Code Nice!</h1>
+      <QCards />
+      <Footer />
     </div>
   );
 }
