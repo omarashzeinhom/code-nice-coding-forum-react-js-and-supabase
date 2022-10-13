@@ -1,7 +1,0 @@
-type Todo {
-    id: ID
-    title: String
-}
-
-extend type Todo @auth(rules: [{ isAuthenticated: true }])
-

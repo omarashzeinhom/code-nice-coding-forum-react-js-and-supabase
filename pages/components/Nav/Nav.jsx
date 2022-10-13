@@ -12,9 +12,10 @@ import {
   Avatar,
   Tooltip,
   MenuItem,
+  Divider,
 } from "@mui/material";
 
-import {LoginState} from "../index"
+import { LoginState } from "../index";
 
 import IntegrationInstructionsIcon from "@mui/icons-material/IntegrationInstructions";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -39,7 +40,6 @@ export default function Nav() {
   const handleCloseUserSettings = () => {
     setAnchorElUser(null);
   };
-
 
   return (
     <AppBar positon="static">
@@ -109,11 +109,18 @@ export default function Nav() {
             CodeNice
           </Typography>
 
-          <Box sx={{ flexGrow: 1, letterSpacing: 4, m: 1, display: { xs: "none", md: "flex" } }} >
+          <Box
+            sx={{
+              flexGrow: 1,
+              letterSpacing: 4,
+              m: 1,
+              display: { xs: "none", md: "flex" },
+            }}
+          >
             {/**PAGES */}
             {pages.map((page, pageIndex) => (
               <Link href={page?.pageLink} key={page + pageIndex}>
-          {page?.pageLabel} 
+                {page?.pageLabel}
               </Link>
             ))}
           </Box>
@@ -150,17 +157,16 @@ export default function Nav() {
                   </Link>
                 </MenuItem>
               ))}
-              <LoginState/>
+              <Divider />
+              {/**LOGIN STATE */}
+              <LoginState />
             </Menu>
           </Box>
         </Toolbar>
       </Container>
     </AppBar>
   );
-
-
-};
-
+}
 
 const pages = [
   {
@@ -174,24 +180,17 @@ const pages = [
     pageLink: "/tags",
     pageLabel: "Tags",
   },
-
-
-
-
 ];
 
 const userSettings = [
   {
-    settingLink: "/profile",
-    settingLabel: "Profile",
-  },
-  {
+    // Object 1
     settingLink: "/account",
     settingLabel: "Account",
   },
   {
-    settingLink: "/dashboard",
-    settingLabel: "Dashboard",
+    // Object 1
+    settingLink: "/account",
+    settingLabel: "Account",
   },
-  
 ];

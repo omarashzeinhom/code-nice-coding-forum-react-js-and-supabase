@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Typography, MenuItem, IconButton } from "@mui/material";
+import { Typography, MenuItem, Button } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
 import LoginIcon from "@mui/icons-material/Login";
 import { supabase } from "../../../utils/supabaseClient";
@@ -45,20 +45,20 @@ export default function LoginState() {
     <>
       {!session ? (
         <MenuItem>
-          <IconButton color="success" href="/login">
+          <Button color="success" href="/login" variant="outlined">
             Log In
             <LoginIcon />
-          </IconButton>
+          </Button>
         </MenuItem>
       ) : (
         <MenuItem key={session?.user?.id} session={session}>
           <Typography textAlign="center">
             User Signed In as{session?.user?.name}:
           </Typography>
-          <IconButton color="error">
+          <Button color="error" variant="outlined">
             Sign Out
             <LogoutIcon />
-          </IconButton>
+          </Button>
         </MenuItem>
       )}
     </>

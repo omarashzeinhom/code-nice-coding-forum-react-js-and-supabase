@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../utils/supabaseClient";
+import { AccountAvatar } from "./components";
+import { Nav, Header } from "./components";
 
 export default function Account({ session }) {
   const [loading, setLoading] = useState(true);
@@ -83,7 +85,17 @@ export default function Account({ session }) {
 
   return (
     <div className="form-widget">
+      <Header />
+      <Nav />
       <div>
+        <AccountAvatar
+          url={avatar_url}
+          size={150}
+          onUpload={(url) => {
+            setAvatarUrl(url);
+            updateProfile({ username, website, avatar_url: url });
+          }}
+        />
         <label htmlFor="email">Email</label>
         <input id="email" type="text" value={session?.user.email} disabled />
       </div>
