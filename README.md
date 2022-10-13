@@ -10,8 +10,8 @@
 
 ```yarn add neo4j-driver```
 
-1. [nextAuth.js -Neo4j getting Started](https://next-auth.js.org/adapters/neo4j)
-2. [nextAuth.js -Models](https://next-auth.js.org/adapters/models)
+2. [nextAuth.js -Neo4j getting Started](https://next-auth.js.org/adapters/neo4j)
+3. [nextAuth.js -Models](https://next-auth.js.org/adapters/models)
 
 ```yarn add next-auth @next-auth/neo4j-adapter neo4j-driver```
 

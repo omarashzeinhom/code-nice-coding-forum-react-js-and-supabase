@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import Fingerprint from "@mui/icons-material/Fingerprint";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signIn, signOut, getProviders } from "next-auth/react";
 
 import {
   FormControl,
@@ -14,11 +14,9 @@ import {
 } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
 import LoginIcon from "@mui/icons-material/Login";
-import GitHubIcon from '@mui/icons-material/GitHub';
+import GitHubIcon from "@mui/icons-material/GitHub";
 
-
-
-const LoginForm = () => {
+export default function LoginForm({ providers }) {
   const [password, setPassword] = React.useState();
   const [email, setEmail] = React.useState();
 
@@ -72,17 +70,32 @@ const LoginForm = () => {
               color="primary"
               type="submit"
               variant="outlined"
-              onClick={( )=> signIn()}
+              //CREDENTIALS SIGN IN WITH CSRF TOKENS
+              onClick={() =>
+                signIn("credentials", {
+                  username: { email },
+                  password: { password },
+                })
+              }
             >
               <Fingerprint />
               Login
             </IconButton>
-            <IconButton>Login with<GitHubIcon/></IconButton>
+            <IconButton>
+              Login with
+              <GitHubIcon />
+            </IconButton>
           </FormControl>
         </FormGroup>
       </Container>
     );
   }
-};
+}
 
-export default LoginForm;
+//**ASYNC FUNC TO GET PROPS FROM PROVIDERS USING CONTEXT */
+export async function getServerSideProps(context) {
+  const providers = await getProviders();
+  return {
+    props: { providers },
+  };
+}
