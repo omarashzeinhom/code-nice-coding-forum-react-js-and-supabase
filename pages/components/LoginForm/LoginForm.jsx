@@ -3,6 +3,7 @@ import IconButton from "@mui/material/IconButton";
 import Fingerprint from "@mui/icons-material/Fingerprint";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { grey } from "@mui/material/colors";
+import { supabase } from "../../../utils/supabaseClient";
 
 import {
   Avatar,
@@ -19,7 +20,6 @@ import {
 } from "@mui/material";
 
 import GitHubIcon from "@mui/icons-material/GitHub";
-
 
 //EXAMPLE SYNTAX
 const colorGrey = grey["900"];
@@ -45,25 +45,36 @@ function Copyright(props) {
 export default function LoginForm({ providers }) {
   const [password, setPassword] = React.useState();
   const [email, setEmail] = React.useState();
+  const [loading, setLoading] = useState(false);
 
-
-  const handleLogin = () => {};
+  const handleLogin = async (email) => {
+    try {
+      setLoading(true);
+      const { error } = await supabase.auth.signInWithOtp({ email });
+      if (error) throw error;
+      alert("Check your email for the login link!");
+    } catch (error) {
+      alert(error.error_description || error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     setEmail(email);
     setPassword(password);
   }, [email, password]);
 
+
   console.log(email, password);
+
+
+  
   if (!"test") {
     return (
       <>
-        <Typography textAlign="center">
-          User Signed In as: 
-        </Typography>
-        <Button color="error" >
-          Do you Want to Sign Out?
-        </Button>
+        <Typography textAlign="center">User Signed In as:</Typography>
+        <Button color="error">Do you Want to Sign Out?</Button>
       </>
     );
   } else {
@@ -102,22 +113,17 @@ export default function LoginForm({ providers }) {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box
-              component="form"
-              noValidate
-              onSubmit={handleLogin}
-              sx={{ mt: 1 }}
-            >
+            <Box sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
                 fullWidth
                 id="email"
                 label="Email Address"
-                name="email"
                 autoComplete="email"
                 onChange={(event) => setEmail(event.target.value)}
                 autoFocus
+                value={email}
               />
               <TextField
                 margin="normal"
@@ -140,6 +146,11 @@ export default function LoginForm({ providers }) {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
                 //CREDENTIALS SIGN IN WITH CSRF TOKENS
+                onClick={(event) => {
+                  event.preventDefault();
+                  handleLogin(email);
+                }}
+                disabled={loading}
               >
                 LOG IN
                 <Fingerprint />
@@ -164,6 +175,7 @@ export default function LoginForm({ providers }) {
                   <Link href="#" variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>
+                  <span>{loading ? "Loading" : "Send magic link"}</span>
                 </Grid>
               </Grid>
               <Copyright sx={{ mt: 5 }} />

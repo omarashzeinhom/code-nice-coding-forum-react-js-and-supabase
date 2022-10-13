@@ -17,14 +17,11 @@ yarn add @supabase/supabase-js
 
 1.
 
-#### Learn More
-
-To learn more about Next.js, take a look at the following resources:
+#### NextJS Docs
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- [Nested Middleware - Next.js Documentation](https://nextjs.org/docs/messages/nested-middleware)
 
 ##### References
 
@@ -52,3 +49,4 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 ###### Various Docs
 
 1. [Encryption Key Generator](https://www.allkeysgenerator.com/Random/Security-Encryption-Key-Generator.aspx)
+2. [Next.js Redirect from / to another page](https://stackoverflow.com/questions/58173809/next-js-redirect-from-to-another-page)
