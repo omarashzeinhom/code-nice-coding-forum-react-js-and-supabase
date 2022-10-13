@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { supabase } from "../../";
 
 import {
   AppBar,
@@ -129,6 +130,7 @@ export default function Nav() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserSettings} sx={{ p: 0 }}>
+                {/**TODO ADD USER AVATAR src={} and alt DYNAMICALLY From SUPABASE */}
                 <Avatar alt="OmarZeinhom" />
               </IconButton>
             </Tooltip>
@@ -185,8 +187,8 @@ const pages = [
 const userSettings = [
   {
     // Object 1
-    settingLink: "/account",
-    settingLabel: "Account",
+    settingLink: "/addquestion",
+    settingLabel: "Add Question",
   },
   {
     // Object 1
