@@ -5,7 +5,7 @@ import { BottomNavigation, Typography } from '@mui/material';
 export default function Footer(){
 
     return (
-<BottomNavigation showlabel={"false"}>
+<BottomNavigation >
     <Typography>
     @OMAR ZEINHOM AKA ANDGOEDU 2023
 

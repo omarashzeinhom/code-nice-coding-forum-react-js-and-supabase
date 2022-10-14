@@ -17,34 +17,52 @@ import Fingerprint from "@mui/icons-material/Fingerprint";
 
 export default function AddQuestion() {
   const [newQuestion, setNewQuestion] = useState({
-    userprofile_questions_added: String, //
-    title: String,
-    body: String,
+    userprofile_questions_added: "", //
+    title: "",
+    body: "",
     created_at: new Date(),
     tags: [""],
     question_tags: [""],
   });
 
-  //TODO HANDLE PROPS PASSED
-  //console.log(newQuestion.title)
+  //DEBUG AND HANDLE PROPS PASSED ✔️
+  /**  console.log(
+    "Title is >>>" + newQuestion.title,
+    "Body is >>>>" + newQuestion?.body,
+    "created_at is >>>" +
+      newQuestion?.created_at +
+      "tags are >>> =" +
+      newQuestion?.tags +
+      "question_tags are >>>> = " +
+      newQuestion?.question_tags
+  ); */
 
-  async function createQuestions() {
-    const { data, error } = await supabase.from("Questions").insert({
-      userprofile_questions_added: newQuestion?.userprofile_questions_added, //
-      title: newQuestion?.title,
-      body: newQuestion?.body,
-      created_at: new Date(),
-      tags: newQuestion?.tags,
-      question_tags: newQuestion?.question_tags,
-    });
+  //TODO FIX 200 CODE ERROR
+  const createQuestions = async () => {
     try {
+      const { data, error } = await supabase.from("Questions").insert({
+        userprofile_questions_added: newQuestion?.userprofile_questions_added, //
+        title: newQuestion?.title,
+        body: newQuestion?.body,
+        created_at: new Date(),
+        tags: newQuestion?.tags,
+        question_tags: newQuestion?.question_tags,
+      });
+
       console.log(data);
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
-  function handleInputChanges() {}
+  const handleInputChanges = (event) => {
+    //HANDLE INPUTS WITH EVENT name HTML5 property✔️
+    setNewQuestion((previous) => ({
+      ...previous,
+      [event.target.name]: event.target.value,
+    }));
+    //PASS THIS ARROW FUNCTION To onChange={handleInputChanges} on each Input✔️
+  };
 
   return (
     <>
@@ -57,11 +75,11 @@ export default function AddQuestion() {
           <FormControl>
             <label>Question Title</label>
             <Input
-              name="cx_email"
+              name="title"
               type="text"
               color={"primary"}
               required
-              onChange={(event) => setNewQuestion(event.target.value)}
+              onChange={handleInputChanges}
             />
           </FormControl>
 
@@ -69,18 +87,20 @@ export default function AddQuestion() {
           <FormControl>
             <label>Body</label>
             <TextareaAutosize
+              name="body"
               style={{ resize: "none", paddingBottom: "7rem" }}
               defaultValue={"Enter Question Body..."}
-              onChange={(event) => setNewQuestion(event.target.value)}
+              onChange={handleInputChanges}
             ></TextareaAutosize>
           </FormControl>
           <FormControl>
             <label>Tags</label>
             <Input
+              name="tags"
+              value={newQuestion?.tags}
               type="search"
               placeholder="Search for tags Here"
-              value={"Search for Tags...js,php,go,c++&etc"}
-              onChange={(event) => setNewQuestion(event.target.value)}
+              onChange={handleInputChanges}
             />{" "}
             <br />
           </FormControl>

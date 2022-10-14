@@ -9,9 +9,10 @@ import {
   Button,
   FormGroup,
   Container,
+  Divider,
 } from "@mui/material";
 
-export default function Account({ session }) {
+export default function Account({ session, user }) {
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState(null);
   const [website, setWebsite] = useState(null);
@@ -95,28 +96,35 @@ export default function Account({ session }) {
     <div className="form-widget">
       <Header />
       <Nav />
+
       <Container fixed maxWidth="md">
         <FormGroup>
           <Box
-            m={1}
+            m={5}
             display={"flex"}
             justifyContent={"center"}
             alignItems={"center"}
           >
-            <label>User Avatar</label>
-            <AccountAvatar
-              url={avatar_url}
-              size={150}
-              onUpload={(url) => {
-                setAvatarUrl(url);
-                updateProfile({ username, website, avatar_url: url });
-              }}
-            />
+            <FormControl>
+              <label>User Avatar</label>
+              <AccountAvatar
+                url={avatar_url}
+                size={150}
+                onUpload={(url) => {
+                  setAvatarUrl(url);
+                  updateProfile({ username, website, avatar_url: url });
+                }}
+              />
+            </FormControl>
           </Box>
+
+          <Divider />
+
           <FormControl>
             <label htmlFor="email">Email</label>
-            <Input type="text" value={session?.user.email} disabled />
+            <Input type="text" value={session?.user.email} />
           </FormControl>
+          <Divider />
 
           <FormControl>
             <label htmlFor="username">Name</label>
@@ -127,6 +135,9 @@ export default function Account({ session }) {
               onChange={(e) => setUsername(e.target.value)}
             />
           </FormControl>
+
+          <Divider />
+
           <FormControl>
             <label htmlFor="website">Website</label>
             <Input
@@ -144,16 +155,6 @@ export default function Account({ session }) {
               variant="outlined"
             >
               {loading ? "Loading ..." : "Update"}
-            </Button>
-          </FormControl>
-
-          <FormControl>
-            <Button
-              onClick={() => supabase.auth.signOut()}
-              variant="outlined"
-              color="error"
-            >
-              Sign Out
             </Button>
           </FormControl>
         </FormGroup>

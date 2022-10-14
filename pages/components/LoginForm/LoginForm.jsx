@@ -4,6 +4,7 @@ import Fingerprint from "@mui/icons-material/Fingerprint";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { grey } from "@mui/material/colors";
 import { supabase } from "../../../utils/supabaseClient";
+import { withPageAuth } from '@supabase/auth-helpers-nextjs'
 
 import {
   Avatar,
@@ -17,9 +18,11 @@ import {
   TextField,
   Checkbox,
   Paper,
+  Alert,
 } from "@mui/material";
 
 import GitHubIcon from "@mui/icons-material/GitHub";
+import LoginState from "../LoginState/LoginState";
 
 //EXAMPLE SYNTAX
 const colorGrey = grey["900"];
@@ -34,7 +37,7 @@ function Copyright(props) {
     >
       {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        OmarZeinhom AKA - ANDGOEDU
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -42,8 +45,7 @@ function Copyright(props) {
   );
 }
 
-export default function LoginForm({ providers }) {
-  const [password, setPassword] = React.useState();
+export default function LoginForm({ providers, user,session }) {
   const [email, setEmail] = React.useState();
   const [loading, setLoading] = useState(false);
 
@@ -60,27 +62,60 @@ export default function LoginForm({ providers }) {
     }
   };
 
+  const handleNotification = (event) => {
+    if (email) {
+      return (
+        <Alert severity="success" variant="contained">
+          Your {`${email}`} has been mailed a Link , Please Check your Inbox for
+          One Time Link 🥳
+        </Alert>
+      );
+    } else {
+      return (
+        <Alert severity="error" variant="contained">
+          Email Was not sent a link!🤯, Please Try Again
+        </Alert>
+      );
+    }
+  };
+
   useEffect(() => {
     setEmail(email);
-    setPassword(password);
-  }, [email, password]);
+  }, [email]);
+
+  console.log(email);
+
+const LoginStateSess = ()=>{
+
+  return (
+    <LoginState
+    session={session}
+    />
+
+  )
+
+}
 
 
-  console.log(email, password);
 
 
-  
-  if (!"test") {
+
+
+  if (session) {
     return (
       <>
+
         <Typography textAlign="center">User Signed In as:</Typography>
         <Button color="error">Do you Want to Sign Out?</Button>
+        <LoginStateSess/>
+
       </>
     );
   } else {
     return (
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
+
         <Grid
           item
           xs={false}
@@ -113,6 +148,9 @@ export default function LoginForm({ providers }) {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
+            <Typography component="h4" variant="h6">
+              With 1 time link.
+            </Typography>
             <Box sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
@@ -125,17 +163,7 @@ export default function LoginForm({ providers }) {
                 autoFocus
                 value={email}
               />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                onChange={(event) => setPassword(event.target.value)}
-                id="password"
-                autoComplete="current-password"
-              />
+
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
@@ -144,6 +172,7 @@ export default function LoginForm({ providers }) {
                 type="submit"
                 fullWidth
                 variant="contained"
+                color="success"
                 sx={{ mt: 3, mb: 2 }}
                 //CREDENTIALS SIGN IN WITH CSRF TOKENS
                 onClick={(event) => {
@@ -188,9 +217,6 @@ export default function LoginForm({ providers }) {
 }
 
 //**ASYNC FUNC TO GET PROPS FROM PROVIDERS USING CONTEXT */
-export async function getServerSideProps(context) {
-  const providers = await getProviders();
-  return {
-    props: { providers },
-  };
-}
+
+
+export const getServerSideProps = withPageAuth({ redirectTo: '/account' })

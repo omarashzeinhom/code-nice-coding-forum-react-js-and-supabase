@@ -41,6 +41,9 @@ export default function LoginState() {
     };
   }, []);
 
+  //DEBUG SESSION PROPS
+  //console.log(session.user)
+
   return (
     <>
       {!session ? (
@@ -52,10 +55,15 @@ export default function LoginState() {
         </MenuItem>
       ) : (
         <MenuItem key={session?.user?.id} session={session}>
-          <Typography textAlign="center">
-            User Signed In as{session?.user?.name}:
+          <Typography textAlign="center" component={"small"}>
+            <em>
+            User Signed In as
+
+              </em>
+              <br/>
+              {JSON.stringify(session?.user.email)}
           </Typography>
-          <Button color="error" variant="outlined">
+          <Button color="error" variant="outlined" onClick={() => supabase.auth.signOut()}>
             Sign Out
             <LogoutIcon />
           </Button>

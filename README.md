@@ -1,5 +1,11 @@
 # StackOverFlow Clone in Next.js and Neo4j
 
+- TODOS
+- MATCH profiles to Questions
+- MATCH Each Question to Tags using question_tags
+- DISPLAY USER AVATAR FROM SUPABASE IN NAVBAR
+-
+
 ## Start By
 
 ```yarn dev```
@@ -13,6 +19,8 @@
 yarn add @supabase/supabase-js
 ```
 
+3. [@supabase/auth-helpers-nextjs-A collection of framework specific Auth utilities for working with Supabase.](https://yarnpkg.com/package/@supabase/auth-helpers-nextjs)```yarn add @supabase/auth-helpers-nextjs```
+
 #### Handling Errors
 
 1.
@@ -25,9 +33,7 @@ yarn add @supabase/supabase-js
 
 ##### References
 
-
-
-##### SUPABASE BACKEND SQL AND FIREBASE ALTERNATIVE 
+##### SUPABASE BACKEND SQL AND FIREBASE ALTERNATIVE
 
 1. [Create data: insert()](https://supabase.com/docs/reference/javascript/insert)
 
@@ -51,6 +57,7 @@ yarn add @supabase/supabase-js
 8. [Card - MUI Docs](https://mui.com/material-ui/react-card/)
 9. [Fragments - React Docs](https://reactjs.org/docs/fragments.html)
 10. [Colors - MUI Docs](https://mui.com/material-ui/customization/color/#main-content)
+11. [Alert - MUI Docs](https://mui.com/material-ui/api/alert/)
 
 ###### Various Docs
 

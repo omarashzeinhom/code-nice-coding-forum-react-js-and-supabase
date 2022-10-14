@@ -53,7 +53,6 @@ export default function Nav() {
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
-              aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNav}
@@ -151,13 +150,13 @@ export default function Nav() {
               onClose={handleCloseUserSettings}
             >
               {userSettings.map((setting, settingsIndex) => (
-                <MenuItem key={settingsIndex + setting}>
-                  <Link href={setting?.settingLink}>
+                <Link href={setting?.settingLink} key={settingsIndex + setting}>
+                  <MenuItem>
                     <Typography textAlign="center">
                       {setting?.settingLabel}
                     </Typography>
-                  </Link>
-                </MenuItem>
+                  </MenuItem>
+                </Link>
               ))}
               <Divider />
               {/**LOGIN STATE */}
