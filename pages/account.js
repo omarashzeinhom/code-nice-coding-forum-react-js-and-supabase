@@ -2,6 +2,14 @@ import { useState, useEffect } from "react";
 import { supabase } from "../utils/supabaseClient";
 import { AccountAvatar } from "./components";
 import { Nav, Header } from "./components";
+import {
+  FormControl,
+  Input,
+  Box,
+  Button,
+  FormGroup,
+  Container,
+} from "@mui/material";
 
 export default function Account({ session }) {
   const [loading, setLoading] = useState(true);
@@ -87,55 +95,69 @@ export default function Account({ session }) {
     <div className="form-widget">
       <Header />
       <Nav />
-      <div>
-        <AccountAvatar
-          url={avatar_url}
-          size={150}
-          onUpload={(url) => {
-            setAvatarUrl(url);
-            updateProfile({ username, website, avatar_url: url });
-          }}
-        />
-        <label htmlFor="email">Email</label>
-        <input id="email" type="text" value={session?.user.email} disabled />
-      </div>
-      <div>
-        <label htmlFor="username">Name</label>
-        <input
-          id="username"
-          type="text"
-          value={username || ""}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="website">Website</label>
-        <input
-          id="website"
-          type="website"
-          value={website || ""}
-          onChange={(e) => setWebsite(e.target.value)}
-        />
-      </div>
+      <Container fixed maxWidth="md">
+        <FormGroup>
+          <Box
+            m={1}
+            display={"flex"}
+            justifyContent={"center"}
+            alignItems={"center"}
+          >
+            <label>User Avatar</label>
+            <AccountAvatar
+              url={avatar_url}
+              size={150}
+              onUpload={(url) => {
+                setAvatarUrl(url);
+                updateProfile({ username, website, avatar_url: url });
+              }}
+            />
+          </Box>
+          <FormControl>
+            <label htmlFor="email">Email</label>
+            <Input type="text" value={session?.user.email} disabled />
+          </FormControl>
 
-      <div>
-        <button
-          className="button primary block"
-          onClick={() => updateProfile({ username, website, avatar_url })}
-          disabled={loading}
-        >
-          {loading ? "Loading ..." : "Update"}
-        </button>
-      </div>
+          <FormControl>
+            <label htmlFor="username">Name</label>
+            <Input
+              id="username"
+              type="text"
+              value={username || ""}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </FormControl>
+          <FormControl>
+            <label htmlFor="website">Website</label>
+            <Input
+              id="website"
+              type="website"
+              value={website || ""}
+              onChange={(e) => setWebsite(e.target.value)}
+            />
+          </FormControl>
 
-      <div>
-        <button
-          className="button block"
-          onClick={() => supabase.auth.signOut()}
-        >
-          Sign Out
-        </button>
-      </div>
+          <FormControl>
+            <Button
+              onClick={() => updateProfile({ username, website, avatar_url })}
+              disabled={loading}
+              variant="outlined"
+            >
+              {loading ? "Loading ..." : "Update"}
+            </Button>
+          </FormControl>
+
+          <FormControl>
+            <Button
+              onClick={() => supabase.auth.signOut()}
+              variant="outlined"
+              color="error"
+            >
+              Sign Out
+            </Button>
+          </FormControl>
+        </FormGroup>
+      </Container>
     </div>
   );
 }

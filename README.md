@@ -25,7 +25,13 @@ yarn add @supabase/supabase-js
 
 ##### References
 
-###### BackEnd
+
+
+##### SUPABASE BACKEND SQL AND FIREBASE ALTERNATIVE 
+
+1. [Create data: insert()](https://supabase.com/docs/reference/javascript/insert)
+
+###### BackEnd OLD ONE
 
 1. [Authentication - Neo4j Docs](https://neo4j.com/docs/graphql-manual/current/auth/authentication/)
 2. [Connect to a Neo4j DBMS - Neo4j Docs](https://neo4j.com/docs/browser-manual/current/operations/dbms-connection/)
