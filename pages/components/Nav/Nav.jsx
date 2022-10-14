@@ -27,7 +27,6 @@ export default function Nav({url, size, session}) {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
 
-
   
 
   // OPEN NAV

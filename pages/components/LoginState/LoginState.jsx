@@ -3,10 +3,12 @@ import { Typography, MenuItem, Button } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
 import LoginIcon from "@mui/icons-material/Login";
 import { supabase } from "../../../utils/supabaseClient";
+import { getProfile } from "../../account";
 
 export default function LoginState() {
   const [isLoading, setIsLoading] = useState(true);
   const [session, setSession] = useState(null);
+
 
   useEffect(() => {
     let mounted = true;

@@ -18,9 +18,10 @@ import Fingerprint from "@mui/icons-material/Fingerprint";
 export default function AddQuestion() {
   const [newQuestion, setNewQuestion] = useState([
     {
-      //
-      title: "",
+      title: " ",
+      description: " ",
       body: "",
+      thumbnail: " ",
       created_at: new Date(),
       tags: [""],
       question_tags: [""],
@@ -31,16 +32,20 @@ export default function AddQuestion() {
   ]);
 
   //DEBUG AND HANDLE PROPS PASSED ✔️
-  /**  console.log(
+  console.log(
     "Title is >>>" + newQuestion.title,
     "Body is >>>>" + newQuestion?.body,
+    "Description is >>>" + newQuestion?.description,
+    "thumbnail is >>>" + newQuestion?.thumbnail,
     "created_at is >>>" +
       newQuestion?.created_at +
       "tags are >>> =" +
       newQuestion?.tags +
       "question_tags are >>>> = " +
-      newQuestion?.question_tags
-  ); */
+      newQuestion?.question_tags,
+    "user_email_profile_questions >>>> = " +
+      newQuestion?.user_email_profile_questions
+  );
 
   //TODO FIX 200 CODE ERROR
   const createQuestions = async () => {
@@ -48,13 +53,14 @@ export default function AddQuestion() {
       const { data, error } = await supabase.from("Questions").insert([
         {
           title: newQuestion?.title,
+          description: newQuestion?.description,
           body: newQuestion?.body,
+          thumbnail: JSON.stringify(newQuestion?.thumbnail),
           created_at: new Date(),
           tags: newQuestion?.tags,
           question_tags: newQuestion?.tags,
           user_email_profile_questions:
             newQuestion?.user_email_profile_questions,
-          //TODO INSERT IMAGE HERE
         },
       ]);
 
@@ -91,6 +97,17 @@ export default function AddQuestion() {
               onChange={handleInputChanges}
             />
           </FormControl>
+          <Divider color={"primary"} />
+
+          <FormControl>
+            <label>Description</label>
+            <Input
+              type="text"
+              name="description"
+              placeholder="Description"
+            />{" "}
+            <br />
+          </FormControl>
 
           <Divider color={"primary"} />
           <FormControl>
@@ -102,6 +119,8 @@ export default function AddQuestion() {
               onChange={handleInputChanges}
             ></TextareaAutosize>
           </FormControl>
+          <Divider color={"primary"} />
+
           <FormControl>
             <label>Tags</label>
             <Input
@@ -115,8 +134,15 @@ export default function AddQuestion() {
           </FormControl>
           <FormControl>
             <label>Image</label>
-            <Input type="file" placeholder="Upload Question Image" /> <br />
+            <Input
+              type="file"
+              name="thumbnail"
+              placeholder="Upload Question Image"
+            />{" "}
+            <br />
           </FormControl>
+
+          <Divider color={"primary"} />
 
           <Button color="primary" type="submit" variant="outlined">
             <Fingerprint />

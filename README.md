@@ -35,11 +35,12 @@ yarn add @supabase/supabase-js
 
 ##### References
 
-##### SUPABASE BACKEND SQL AND FIREBASE ALTERNATIVE
+##### SUPABASE BACKEND 
 
 1. [Create data: insert()](https://supabase.com/docs/reference/javascript/insert)
 2. [Row Level Security](https://supabase.com/docs/guides/auth/row-level-security)
-[Executing SQL usin plv8](https://supabase.com/docs/guides/database/extensions/plv8#executing-sql)
+3. [Fetch data: select()](https://supabase.com/docs/reference/javascript/select)
+4. [Executing SQL usin plv8](https://supabase.com/docs/guides/database/extensions/plv8#executing-sql)
 Executing SQL
 You can execute SQL within plv8 code using the plv8.execute function.
 

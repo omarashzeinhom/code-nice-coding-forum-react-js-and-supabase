@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import {supabase} from "../../../utils/supabaseClient";
+import { supabase } from "../../../utils/supabaseClient";
 //MUI
 import { styled } from "@mui/material/styles";
 import { red } from "@mui/material/colors";
@@ -45,20 +45,39 @@ const Item = styled(Card)(({ theme }) => ({
 export default function QCards() {
   //GUI
   const [expanded, setExpanded] = React.useState(false);
-//LOGIC 
+  //LOGIC
+  const [question, setQuestions] = React.useState({});
 
+
+  const getQuestions = async function () {
+    try {
+      const { data, error } = await supabase.from("Questions").select(`title,body,description,thumbnail,created_at,question_tags,user_email_profile_questions`).eq("id", 5)
+
+      setQuestions(data);
+
+      //DEBUG GETS EMPTY ARRAY
+      console.log(data);
+
+      console.log(error);
+    } catch (error) {
+      console.log("Error has been found " + error);
+    }
+  };
 
 
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+  //DEBUG GETS EMPTY ARRAY
+  //console.log(question);
 
+  useEffect(() => {
+    getQuestions();
+  }, []);
+  
   return (
     <Grid container spacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-
-
-
       {qcardsContent.map((qcard, index) => (
         <React.Fragment key={qcard + index}>
           {/* NOTICE THAT Grid container & Grid item are not the same thing were mapping over the item */}
