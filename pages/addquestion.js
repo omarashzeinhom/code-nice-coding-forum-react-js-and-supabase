@@ -16,14 +16,19 @@ import {
 import Fingerprint from "@mui/icons-material/Fingerprint";
 
 export default function AddQuestion() {
-  const [newQuestion, setNewQuestion] = useState({
-    userprofile_questions_added: "", //
-    title: "",
-    body: "",
-    created_at: new Date(),
-    tags: [""],
-    question_tags: [""],
-  });
+  const [newQuestion, setNewQuestion] = useState([
+    {
+      //
+      title: "",
+      body: "",
+      created_at: new Date(),
+      tags: [""],
+      question_tags: [""],
+      //TODO MATCH USER WITH USER ID OR USERNAME
+      user_email_profile_questions: ["Test"],
+      //TODO INSERT IMAGE HERE
+    },
+  ]);
 
   //DEBUG AND HANDLE PROPS PASSED ✔️
   /**  console.log(
@@ -40,16 +45,20 @@ export default function AddQuestion() {
   //TODO FIX 200 CODE ERROR
   const createQuestions = async () => {
     try {
-      const { data, error } = await supabase.from("Questions").insert({
-        userprofile_questions_added: newQuestion?.userprofile_questions_added, //
-        title: newQuestion?.title,
-        body: newQuestion?.body,
-        created_at: new Date(),
-        tags: newQuestion?.tags,
-        question_tags: newQuestion?.question_tags,
-      });
+      const { data, error } = await supabase.from("Questions").insert([
+        {
+          title: newQuestion?.title,
+          body: newQuestion?.body,
+          created_at: new Date(),
+          tags: newQuestion?.tags,
+          question_tags: newQuestion?.tags,
+          user_email_profile_questions:
+            newQuestion?.user_email_profile_questions,
+          //TODO INSERT IMAGE HERE
+        },
+      ]);
 
-      console.log(data);
+      alert(data + "Has Been added Sucessfully");
     } catch (error) {
       console.log(error);
     }
@@ -77,7 +86,7 @@ export default function AddQuestion() {
             <Input
               name="title"
               type="text"
-              color={"primary"}
+              color="primary"
               required
               onChange={handleInputChanges}
             />
@@ -109,11 +118,7 @@ export default function AddQuestion() {
             <Input type="file" placeholder="Upload Question Image" /> <br />
           </FormControl>
 
-          <Button
-            color="primary"
-            type="submit"
-            variant="outlined"
-          >
+          <Button color="primary" type="submit" variant="outlined">
             <Fingerprint />
             <Typography>Add Question</Typography>
           </Button>
