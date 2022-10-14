@@ -21,21 +21,7 @@ yarn add @supabase/supabase-js
 
 3. [@supabase/auth-helpers-nextjs-A collection of framework specific Auth utilities for working with Supabase.](https://yarnpkg.com/package/@supabase/auth-helpers-nextjs)```yarn add @supabase/auth-helpers-nextjs```
 
-4. [Executing SQL usin plv8](https://supabase.com/docs/guides/database/extensions/plv8#executing-sql)
-Executing SQL
-You can execute SQL within plv8 code using the plv8.execute function.
-```plv8
-
-create or replace function update_user(id bigint, first_name text)
-returns smallint as $$
-
-    var num_affected = plv8.execute(
-        'update profiles set first_name = $1 where id = $2',
-        [first_name, id]
-    );
-
-    return num_affected;
-```
+4.
 
 #### Handling Errors
 
@@ -52,12 +38,23 @@ returns smallint as $$
 ##### SUPABASE BACKEND SQL AND FIREBASE ALTERNATIVE
 
 1. [Create data: insert()](https://supabase.com/docs/reference/javascript/insert)
+2. [Row Level Security](https://supabase.com/docs/guides/auth/row-level-security)
+[Executing SQL usin plv8](https://supabase.com/docs/guides/database/extensions/plv8#executing-sql)
+Executing SQL
+You can execute SQL within plv8 code using the plv8.execute function.
 
-###### BackEnd OLD ONE
+```plv8
 
-1. [Authentication - Neo4j Docs](https://neo4j.com/docs/graphql-manual/current/auth/authentication/)
-2. [Connect to a Neo4j DBMS - Neo4j Docs](https://neo4j.com/docs/browser-manual/current/operations/dbms-connection/)
-3. [Query parameters - Neo4j Docs](https://neo4j.com/docs/browser-manual/current/operations/query-parameters/)
+create or replace function update_user(id bigint, first_name text)
+returns smallint as $$
+
+    var num_affected = plv8.execute(
+        'update profiles set first_name = $1 where id = $2',
+        [first_name, id]
+    );
+
+    return num_affected;
+```
 
 ###### Front End
 
@@ -79,3 +76,9 @@ returns smallint as $$
 
 1. [Encryption Key Generator](https://www.allkeysgenerator.com/Random/Security-Encryption-Key-Generator.aspx)
 2. [Next.js Redirect from / to another page](https://stackoverflow.com/questions/58173809/next-js-redirect-from-to-another-page)
+
+###### BackEnd OLD ONE
+
+1. [Authentication - Neo4j Docs](https://neo4j.com/docs/graphql-manual/current/auth/authentication/)
+2. [Connect to a Neo4j DBMS - Neo4j Docs](https://neo4j.com/docs/browser-manual/current/operations/dbms-connection/)
+3. [Query parameters - Neo4j Docs](https://neo4j.com/docs/browser-manual/current/operations/query-parameters/)
