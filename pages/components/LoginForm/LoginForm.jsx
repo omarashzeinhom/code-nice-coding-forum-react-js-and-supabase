@@ -26,24 +26,8 @@ import LoginState from "../LoginState/LoginState";
 
 //EXAMPLE SYNTAX
 const colorGrey = grey["900"];
+import Copyright from "../Footer/Footer";
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        OmarZeinhom AKA - ANDGOEDU
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
 export default function LoginForm({ providers, user,session }) {
   const [email, setEmail] = React.useState();

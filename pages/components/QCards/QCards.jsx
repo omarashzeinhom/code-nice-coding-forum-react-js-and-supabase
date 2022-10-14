@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { supabase } from "../../../utils/supabaseClient";
+import {supabase} from "../../../utils/supabaseClient";
 //MUI
 import { styled } from "@mui/material/styles";
 import { red } from "@mui/material/colors";
@@ -45,7 +45,10 @@ const Item = styled(Card)(({ theme }) => ({
 export default function QCards() {
   //GUI
   const [expanded, setExpanded] = React.useState(false);
-  //LOGIC
+//LOGIC 
+
+
+
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -53,6 +56,9 @@ export default function QCards() {
 
   return (
     <Grid container spacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+
+
+
       {qcardsContent.map((qcard, index) => (
         <React.Fragment key={qcard + index}>
           {/* NOTICE THAT Grid container & Grid item are not the same thing were mapping over the item */}

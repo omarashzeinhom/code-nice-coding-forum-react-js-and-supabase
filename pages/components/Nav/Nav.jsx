@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { supabase } from "../../";
+import { supabase } from "../../../utils/supabaseClient";
 
 import {
   AppBar,
@@ -21,9 +21,14 @@ import { LoginState } from "../index";
 import IntegrationInstructionsIcon from "@mui/icons-material/IntegrationInstructions";
 import MenuIcon from "@mui/icons-material/Menu";
 
-export default function Nav() {
+export default function Nav({url, size, session}) {
+  //GUI ANCHORS
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+
+
+  
 
   // OPEN NAV
   const handleOpenNav = (event) => {
@@ -130,7 +135,7 @@ export default function Nav() {
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserSettings} sx={{ p: 0 }}>
                 {/**TODO ADD USER AVATAR src={} and alt DYNAMICALLY From SUPABASE */}
-                <Avatar alt="OmarZeinhom" />
+                <Avatar alt="O" src={""} />
               </IconButton>
             </Tooltip>
             <Menu

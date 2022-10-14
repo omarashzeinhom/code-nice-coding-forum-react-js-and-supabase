@@ -110,7 +110,6 @@ export default function AddQuestion() {
           </FormControl>
 
           <Button
-            aria-label="fingerprint"
             color="primary"
             type="submit"
             variant="outlined"
