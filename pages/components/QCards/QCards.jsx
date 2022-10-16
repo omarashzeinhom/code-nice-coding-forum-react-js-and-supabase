@@ -45,37 +45,71 @@ const Item = styled(Card)(({ theme }) => ({
 export default function QCards() {
   //GUI
   const [expanded, setExpanded] = React.useState(false);
-  //LOGIC
-  const [question, setQuestions] = React.useState({});
-
-
-  const getQuestions = async function () {
-    try {
-      const { data, error } = await supabase.from("Questions").select(`title,body,description,thumbnail,created_at,question_tags,user_email_profile_questions`).eq("id", 5)
-
-      setQuestions(data);
-
-      //DEBUG GETS EMPTY ARRAY
-      console.log(data);
-
-      console.log(error);
-    } catch (error) {
-      console.log("Error has been found " + error);
-    }
-  };
-
-
-
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+  //LOGIC
+  const [questions, setQuestions] = React.useState([
+    {
+      id: Number,
+      title: "",
+      created_at: Date,
+      question_tags: "",
+    },
+  ]);
+
+  /**
+   * const getQuestions = async function () {
+    const mappedData = [];
+    try {
+      const { data, error } = await supabase
+        .from('questions')
+        .select('id, title, created_at, question_tags');
+
+      //.from("Questions").select(`title,body,description,thumbnail,created_at,question_tags,user_email_profile_questions`).eq("id", 5)
+
+      //DEBUG GETS EMPTY ARRAY
+      //console.log(data);
+
+      setQuestions(mappedData);
+    } catch (error) {
+      console.log("Error has been found " + error);
+    }
+    setQuestions(mappedData);
+    return true;
+  };
+   */
+
+  /*>>>>>>>>>---GET QUESTIONS START----<<<<<<<<*/
+  function getQuestions() {
+    try {
+      const queryObj = supabase.from("Questions").select(`id, 
+    created_at, 
+    title, 
+    body,
+    description,
+    thumbnail,
+    tags,  question_tags`);
+
+      console.log(queryObj);
+
+      setQuestions(queryObj);
+    } catch (error) {
+      console.warn("Error has been found" + error);
+    }
+  }
+  /*>>>>>>>>>---GET QUESTIONS END----<<<<<<<< */
+
+  //console.log(questions);
+
   //DEBUG GETS EMPTY ARRAY
-  //console.log(question);
+  // console.log(questions);
 
   useEffect(() => {
+    //getQuestions();
     getQuestions();
   }, []);
-  
+
   return (
     <Grid container spacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
       {qcardsContent.map((qcard, index) => (
