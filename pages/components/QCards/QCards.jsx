@@ -58,30 +58,30 @@ export default function QCards() {
     },
   ]);
 
-  /**
-   * const getQuestions = async function () {
-    const mappedData = [];
-    try {
+
+
+ const getQuestions = async function () {
+
+
+try {
       const { data, error } = await supabase
-        .from('questions')
-        .select('id, title, created_at, question_tags');
+        .from('Questions').select('id, title, created_at, question_tags');
 
       //.from("Questions").select(`title,body,description,thumbnail,created_at,question_tags,user_email_profile_questions`).eq("id", 5)
 
       //DEBUG GETS EMPTY ARRAY
-      //console.log(data);
+      console.log(data);
 
-      setQuestions(mappedData);
     } catch (error) {
       console.log("Error has been found " + error);
     }
-    setQuestions(mappedData);
     return true;
   };
-   */
+
 
   /*>>>>>>>>>---GET QUESTIONS START----<<<<<<<<*/
-  function getQuestions() {
+  /**
+   * function getQuestions() {
     try {
       const queryObj = supabase.from("Questions").select(`id, 
     created_at, 
@@ -98,6 +98,7 @@ export default function QCards() {
       console.warn("Error has been found" + error);
     }
   }
+   */
   /*>>>>>>>>>---GET QUESTIONS END----<<<<<<<< */
 
   //console.log(questions);
