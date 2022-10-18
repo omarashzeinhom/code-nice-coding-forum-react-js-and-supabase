@@ -97,7 +97,7 @@ export default function Account({ session, user }) {
   return (
     <div className="form-widget">
       <Header />
-      <Nav />
+      <Nav url={undefined} size={undefined} session={undefined} />
 
       <Container fixed maxWidth="md">
         <FormGroup>

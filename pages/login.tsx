@@ -5,8 +5,8 @@ const Login = () => {
   return (
     <div>
       <Header />
-      <Nav />
-      <LoginForm />
+      <Nav url={undefined} size={undefined} session={undefined} />
+      <LoginForm providers={undefined} user={undefined} session={undefined} />
     </div>
   );
 };

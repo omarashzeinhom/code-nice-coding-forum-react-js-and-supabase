@@ -7,7 +7,7 @@ export default function Tags() {
   return (
     <>
       <Header />
-      <Nav />
+      <Nav url={undefined} size={undefined} session={undefined} />
       <h1>Tags</h1>
 
       <Button color={"secondary"} variant="outlined">

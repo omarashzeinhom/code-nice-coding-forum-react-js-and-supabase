@@ -6,7 +6,7 @@ const Questions = () => {
   return (
     <div className={styles.container}>
       <Header />
-      <Nav />
+      <Nav url={undefined} size={undefined} session={undefined} />
       <h1>Questions</h1>
       <br />
       <hr />

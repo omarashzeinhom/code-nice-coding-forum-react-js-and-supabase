@@ -16,7 +16,7 @@ import {
 import Fingerprint from "@mui/icons-material/Fingerprint";
 
 export default function AddQuestion() {
-  const [newQuestion, setNewQuestion] = useState([
+  const [newQuestion, setNewQuestion] = useState(
     {
       title: " ",
       description: " ",
@@ -26,10 +26,9 @@ export default function AddQuestion() {
       tags: [""],
       question_tags: [""],
       //TODO MATCH USER WITH USER ID OR USERNAME
-      user_email_profile_questions: ["Test"],
       //TODO INSERT IMAGE HERE
     },
-  ]);
+  );
 
   //DEBUG AND HANDLE PROPS PASSED ✔️
   console.log(
@@ -43,14 +42,13 @@ export default function AddQuestion() {
       newQuestion?.tags +
       "question_tags are >>>> = " +
       newQuestion?.question_tags,
-    "user_email_profile_questions >>>> = " +
-      newQuestion?.user_email_profile_questions
+    
   );
 
   //TODO FIX 200 CODE ERROR
   const createQuestions = async () => {
     try {
-      const { data, error } = await supabase.from("Questions").insert([
+      const { data, error } = await supabase.from("questions").insert(
         {
           title: newQuestion?.title,
           description: newQuestion?.description,
@@ -59,10 +57,9 @@ export default function AddQuestion() {
           created_at: new Date(),
           tags: newQuestion?.tags,
           question_tags: newQuestion?.tags,
-          user_email_profile_questions:
-            newQuestion?.user_email_profile_questions,
+         
         },
-      ]);
+      );
 
       alert(data + "Has Been added Sucessfully");
     } catch (error) {
@@ -82,7 +79,7 @@ export default function AddQuestion() {
   return (
     <>
       <Header />
-      <Nav />
+      <Nav url={undefined} size={undefined} session={undefined} />
       <Container fixed maxWidth="md">
         <FormGroup>
           <h1>Add Question</h1>
