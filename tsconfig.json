@@ -23,7 +23,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "pages/components/index.js"  ],
+, "pages/components/index.js", "pages/_app.js", "pages/components/QCards/QCards.jsx"  ],
   "exclude": [
     "node_modules"
   ]

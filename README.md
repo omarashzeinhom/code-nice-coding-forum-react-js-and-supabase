@@ -32,6 +32,7 @@ yarn add @supabase/supabase-js
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 
 - [Nested Middleware - Next.js Documentation](https://nextjs.org/docs/messages/nested-middleware)
+- [Existing projects migrate from js to ts](https://nextjs.org/docs/basic-features/typescript)
 
 ##### References
 

@@ -49,32 +49,29 @@ export default function QCards() {
     setExpanded(!expanded);
   };
   //LOGIC
-  const [questions, setQuestions] = React.useState([
+  const [questions, setQuestions] = React.useState(
     {
       id: 0,
       title: " ",
       created_at: new Date(),
       question_tags: "",
     },
-  ]);
+  );
 
 
  const getQuestions = async function () {
 
 
 try {
-      const {data, error} = []
-      const query = await supabase
-        .from('Questions');
-
-       const props = query.select('id, title, created_at, question_tags');
+      const {data, error} = await supabase
+        .from('questions').select('*');
 
 
       //.from("Questions").select(`title,body,description,thumbnail,created_at,question_tags,user_email_profile_questions`).eq("id", 5)
 
       //DEBUG GETS EMPTY ARRAY
-      console.log(props);
-  setQuestions(props);
+      console.log(data);
+  setQuestions(questions);
     } catch (error) {
       console.log("Error has been found " + error);
     }
@@ -119,11 +116,11 @@ try {
       {[questions]?.map((question, index) => {
         console.log(question?.created_at);
         console.log(question?.title);
-        return <React.Fragment key={question + index}></React.Fragment>;
+        return <React.Fragment key={index}></React.Fragment>;
       })}
 
       {qcardsContent.map((qcard, index) => (
-        <React.Fragment key={qcard + index}>
+        <React.Fragment key={index}>
           {/* NOTICE THAT Grid container & Grid item are not the same thing were mapping over the item */}
           <Grid item xs={12} sm={12} md={6} lg={4} xl={4}>
             <Item sx={{ maxWidth: 345 }}>
