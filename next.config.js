@@ -6,7 +6,7 @@ const nextConfig = {
     domains: ["images.pexels.com"],
   },
   //`redirects` from[redirects](https://nextjs.org/docs/api-reference/next.config.js/redirects)
- 
+
 };
 
 module.exports = nextConfig;

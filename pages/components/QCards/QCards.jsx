@@ -51,27 +51,30 @@ export default function QCards() {
   //LOGIC
   const [questions, setQuestions] = React.useState([
     {
-      id: Number,
-      title: "",
-      created_at: Date,
+      id: 0,
+      title: " ",
+      created_at: new Date(),
       question_tags: "",
     },
   ]);
-
 
 
  const getQuestions = async function () {
 
 
 try {
-      const { data, error } = await supabase
-        .from('Questions').select('id, title, created_at, question_tags');
+      const {data, error} = []
+      const query = await supabase
+        .from('Questions');
+
+       const props = query.select('id, title, created_at, question_tags');
+
 
       //.from("Questions").select(`title,body,description,thumbnail,created_at,question_tags,user_email_profile_questions`).eq("id", 5)
 
       //DEBUG GETS EMPTY ARRAY
-      console.log(data);
-
+      console.log(props);
+  setQuestions(props);
     } catch (error) {
       console.log("Error has been found " + error);
     }
@@ -80,25 +83,26 @@ try {
 
 
   /*>>>>>>>>>---GET QUESTIONS START----<<<<<<<<*/
-  /**
-   * function getQuestions() {
-    try {
-      const queryObj = supabase.from("Questions").select(`id, 
+  /*function getQuestions() {
+    const queryObj = supabase.from("Questions");
+    const result = queryObj.select(`id, 
     created_at, 
     title, 
     body,
     description,
     thumbnail,
     tags,  question_tags`);
+    try {
+ 
 
-      console.log(queryObj);
+      console.log(result);
 
-      setQuestions(queryObj);
+      setQuestions(result);
     } catch (error) {
       console.warn("Error has been found" + error);
     }
   }
-   */
+*/
   /*>>>>>>>>>---GET QUESTIONS END----<<<<<<<< */
 
   //console.log(questions);
@@ -107,12 +111,17 @@ try {
   // console.log(questions);
 
   useEffect(() => {
-    //getQuestions();
     getQuestions();
   }, []);
 
   return (
     <Grid container spacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+      {[questions]?.map((question, index) => {
+        console.log(question?.created_at);
+        console.log(question?.title);
+        return <React.Fragment key={question + index}></React.Fragment>;
+      })}
+
       {qcardsContent.map((qcard, index) => (
         <React.Fragment key={qcard + index}>
           {/* NOTICE THAT Grid container & Grid item are not the same thing were mapping over the item */}
@@ -146,6 +155,7 @@ try {
                 alt={qcard.postName}
                 loading="lazy"
               />
+
               <CardContent>
                 <Typography variant="body2" color="text.secondary">
                   {qcard?.postDescription}
