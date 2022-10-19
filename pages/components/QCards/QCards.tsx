@@ -64,13 +64,18 @@ export default function QCards() {
 
 try {
       const {data, error} = await supabase
-        .from('questions').select(`id=${questions?.id}, title=${questions?.title}`);
+        .from('questions').select(`
+        id, 
+        title
+        `);
 
 
       //.from("Questions").select(`title,body,description,thumbnail,created_at,question_tags,user_email_profile_questions`).eq("id", 5)
 
       //DEBUG GETS EMPTY ARRAY
       console.log(data);
+
+      
   setQuestions(questions);
     } catch (error) {
       console.log("Error has been found " + error);
