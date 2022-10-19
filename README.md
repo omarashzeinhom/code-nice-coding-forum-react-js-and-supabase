@@ -57,7 +57,7 @@ returns smallint as $$
 
     return num_affected;
 ```
-
+5.[supabase in Next JS returning an empty array when data is in relevant tables](https://stackoverflow.com/questions/71294440/supabase-in-next-js-returning-an-empty-array-when-data-is-in-relevant-tables)
 ###### Front End
 
 1. [MUI React - Default installation](https://mui.com/material-ui/getting-started/installation/#default-installation)

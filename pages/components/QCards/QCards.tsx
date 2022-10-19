@@ -51,10 +51,10 @@ export default function QCards() {
   //LOGIC
   const [questions, setQuestions] = React.useState(
     {
-      id: 5,
-      title: "JavaScript Infinite Loop in useEffect() hook?",
+      id: 0,
+      title: "",
       created_at: new Date(),
-      question_tags: "",
+      question_tags: " ",
     },
   );
 
@@ -66,16 +66,22 @@ try {
       const {data, error} = await supabase
         .from('questions').select(`
         id, 
-        title
+        created_at,
+        question_tags,
+        description,
+        thumbnail,
+        tags,
+        title,
+        body
         `);
-
+      //MAKE SURE TO END THE STATEMENT WITHOUT A , or it will cause an error
 
       //.from("Questions").select(`title,body,description,thumbnail,created_at,question_tags,user_email_profile_questions`).eq("id", 5)
 
       //DEBUG GETS EMPTY ARRAY
       console.log(data);
 
-      
+
   setQuestions(questions);
     } catch (error) {
       console.log("Error has been found " + error);
@@ -118,11 +124,22 @@ try {
 
   return (
     <Grid container spacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+      
       {[questions]?.map((question, index) => {
         console.log(question?.created_at);
         console.log(question?.title);
-        return <React.Fragment key={index}></React.Fragment>;
+        return(
+          <React.Fragment key={index}>
+                   {question?.title}
+          {question?.title}
+          </React.Fragment>
+        );
       })}
+
+
+
+
+
 
       {qcardsContent.map((qcard, index) => (
         <React.Fragment key={index}>
