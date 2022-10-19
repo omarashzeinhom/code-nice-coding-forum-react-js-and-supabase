@@ -30,7 +30,7 @@ export default function Nav({url, size, session}) {
   
 
   // OPEN NAV
-  const handleOpenNav = (event) => {
+  const handleOpenNav = (event:any) => {
     setAnchorElNav(event?.currentTarget);
   };
   // CLOSE NAV
@@ -38,7 +38,7 @@ export default function Nav({url, size, session}) {
     setAnchorElNav(null);
   };
   // OPEN USER SETTINGS
-  const handleOpenUserSettings = (event) => {
+  const handleOpenUserSettings = (event:any) => {
     setAnchorElUser(event?.currentTarget);
   };
   // CLOSE USER SETTINGS
@@ -85,7 +85,7 @@ export default function Nav({url, size, session}) {
             >
               {/**PAGES */}
               {pages.map((page, pageIndex) => (
-                <MenuItem onClick={handleCloseNav} key={page + pageIndex}>
+                <MenuItem onClick={handleCloseNav} key={ pageIndex}>
                   <Link href={page?.pageLink}>
                     <h1>{page?.pageLabel}</h1>
                   </Link>
@@ -123,7 +123,7 @@ export default function Nav({url, size, session}) {
           >
             {/**PAGES */}
             {pages.map((page, pageIndex) => (
-              <Link href={page?.pageLink} key={page + pageIndex}>
+              <Link href={page?.pageLink} key={ pageIndex}>
                 {page?.pageLabel}
               </Link>
             ))}
@@ -154,7 +154,7 @@ export default function Nav({url, size, session}) {
               onClose={handleCloseUserSettings}
             >
               {userSettings.map((setting, settingsIndex) => (
-                <Link href={setting?.settingLink} key={settingsIndex + setting}>
+                <Link href={setting?.settingLink} key={settingsIndex}>
                   <MenuItem>
                     <Typography textAlign="center">
                       {setting?.settingLabel}

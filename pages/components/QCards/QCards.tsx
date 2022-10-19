@@ -51,8 +51,8 @@ export default function QCards() {
   //LOGIC
   const [questions, setQuestions] = React.useState(
     {
-      id: 0,
-      title: " ",
+      id: 5,
+      title: "JavaScript Infinite Loop in useEffect() hook?",
       created_at: new Date(),
       question_tags: "",
     },
@@ -64,7 +64,7 @@ export default function QCards() {
 
 try {
       const {data, error} = await supabase
-        .from('questions').select('*');
+        .from('questions').select(`id=${questions?.id}, title=${questions?.title}`);
 
 
       //.from("Questions").select(`title,body,description,thumbnail,created_at,question_tags,user_email_profile_questions`).eq("id", 5)
