@@ -51,10 +51,15 @@ export default function QCards() {
   //LOGIC
   const [questions, setQuestions] = React.useState(
     {
-      id: 0,
+      id: " ",
       title: "",
       created_at: new Date(),
-      question_tags: " ",
+      question_tags: "",
+      description: " ",
+      tags: " ",
+      thumbnail: " ",
+      body: " ",
+
     },
   );
 
@@ -63,26 +68,46 @@ export default function QCards() {
 
 
 try {
-      const {data, error} = await supabase
-        .from('questions').select(`
-        id, 
-        created_at,
-        question_tags,
-        description,
-        thumbnail,
-        tags,
-        title,
-        body
-        `);
+      
+
+        const id = await supabase.from('questions').select(`id`);
+        const createdAt = await supabase.from('questions').select(`created_at`);
+        const questionTags = await supabase.from('questions').select(`question_tags`);
+        const description = await supabase.from('questions').select(`description`);
+        const thumbnail = await supabase.from('questions').select(`thumbnail`);
+        const tags = await supabase.from('questions').select(`tags`);
+        const title = await supabase.from('questions').select(`title`);
+        const  body = await supabase.from('questions').select(`body`);
+        console.log(id,
+          createdAt,
+          questionTags,
+          description,
+          thumbnail,tags,
+          title,body);
       //MAKE SURE TO END THE STATEMENT WITHOUT A , or it will cause an error
 
       //.from("Questions").select(`title,body,description,thumbnail,created_at,question_tags,user_email_profile_questions`).eq("id", 5)
 
       //DEBUG GETS EMPTY ARRAY
-      console.log(data);
+
+      
+      setQuestions(questions); //TODO setQuestions(data)
+
+let fixedProps = {
+      id: id,
+      title: title,
+      created_at: createdAt,
+      question_tags: questionTags,
+      description: description,
+      tags: tags,
+      thumbnail: thumbnail,
+      body: body,
+
+};
+
+setQuestions(fixedProps);
 
 
-  setQuestions(questions);
     } catch (error) {
       console.log("Error has been found " + error);
     }
@@ -125,16 +150,20 @@ try {
   return (
     <Grid container spacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
       
-      {[questions]?.map((question, index) => {
+   {/*
+    
+       {[questions]?.map((question, index) => {
         console.log(question?.created_at);
         console.log(question?.title);
         return(
           <React.Fragment key={index}>
-                   {question?.title}
+          {question?.title}
           {question?.title}
           </React.Fragment>
         );
       })}
+    */}
+
 
 
 
