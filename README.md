@@ -1,4 +1,4 @@
-# StackOverFlow Clone in Next.js and Neo4j
+# StackOverFlow Clone in Next.js , redux & supabase.
 
 - TODOS
 - MATCH profiles to Questions
@@ -78,6 +78,8 @@ returns smallint as $$
 
 1. [Encryption Key Generator](https://www.allkeysgenerator.com/Random/Security-Encryption-Key-Generator.aspx)
 2. [Next.js Redirect from / to another page](https://stackoverflow.com/questions/58173809/next-js-redirect-from-to-another-page)
+3. [Next.js Environment Variables ](https://nextjs.org/docs/pages/building-your-application/configuring/environment-variables)
+4. [Resolving a merge conflict using the command line](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/resolving-a-merge-conflict-using-the-command-line)
 
 ###### BackEnd OLD ONE
 
