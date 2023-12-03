@@ -23,10 +23,22 @@ import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
-const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
+interface Question {
+  id: number;
+  title: string;
+  created_at: string;
+  thumbnail: string;
+  description: string;
+  question_tags: string;
+  body: string;
+  // Add other fields as needed
+}
+
+const ExpandMore = styled(({ expand, ...other }: { expand: boolean; [key: string]: any }) => (
+  <IconButton {...other}>
+    <ExpandMoreIcon />
+  </IconButton>
+))(({ theme, expand }: { theme: any; expand: boolean }) => ({
   transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
   marginLeft: "auto",
   transition: theme.transitions.create("transform", {
@@ -34,7 +46,8 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-const Item = styled(Card)(({ theme }) => ({
+
+const Item = styled(Card)(({ theme }: { theme: any }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
   padding: theme.spacing(1),
@@ -46,19 +59,19 @@ export default function QCards() {
   //GUI
   const [expandedIndex, setExpandedIndex] = useState(-1); // Initialize with -1 for no expanded item
 
-  const handleExpandClick = (index) => {
+  const handleExpandClick = (index: number) => {
     setExpandedIndex(index === expandedIndex ? -1 : index);
   };
 
   //LOGIC
-  const [questions, setQuestions] = useState<any[]>([]);
+  const [questions, setQuestions] = useState<Question[]>([]);
 
   async function fetchQuestions() {
     const { data, error } = await supabase.from("questions").select("*");
     if (error) {
       console.error("Error fetchign questions", error);
     } else {
-      setQuestions(data);
+      setQuestions(data || []);
     }
   }
 
@@ -71,7 +84,7 @@ export default function QCards() {
   return (
     <Grid container spacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
       {questions?.map((question, index) => {
-                const isExpanded = index === expandedIndex;
+        const isExpanded = index === expandedIndex;
 
         return (
           <React.Fragment key={index}>
