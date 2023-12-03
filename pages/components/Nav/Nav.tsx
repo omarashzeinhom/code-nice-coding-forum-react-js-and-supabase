@@ -63,7 +63,7 @@ export default function Nav({url, size, session}: NavProps) {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <IntegrationInstructionsIcon
