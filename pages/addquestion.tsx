@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, ChangeEvent } from "react";
 import { Nav, Header } from "./components/index";
 import { supabase } from "../lib/supabaseClient";
 import {
@@ -25,16 +25,14 @@ interface addQuestionProps {
 }
 
 export default function AddQuestion() {
-  const [newQuestion, setNewQuestion] = useState({
-    title: " ",
-    description: " ",
+  const [newQuestion, setNewQuestion] = useState<addQuestionProps>({
+    title: "",
+    description: "",
     body: "",
-    thumbnail: " ",
+    thumbnail: "",
     created_at: new Date(),
     tags: [""],
     question_tags: [""],
-    //TODO MATCH USER WITH USER ID OR USERNAME
-    //TODO INSERT IMAGE HERE
   });
 
   //DEBUG AND HANDLE PROPS PASSED ✔️
@@ -70,15 +68,34 @@ export default function AddQuestion() {
     }
   };
 
-  const handleInputChanges = (event) => {
-    //HANDLE INPUTS WITH EVENT name HTML5 property✔️
+ 
+
+  const handleInputChanges = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setNewQuestion((previous) => ({
       ...previous,
       [event.target.name]: event.target.value,
     }));
-    //PASS THIS ARROW FUNCTION To onChange={handleInputChanges} on each Input✔️
   };
 
+  const handleTagsChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setNewQuestion((previous) => ({
+      ...previous,
+      tags: [event.target.value],
+    }));
+  };
+
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setNewQuestion((previous) => ({
+          ...previous,
+          thumbnail: e.target?.result as string,
+        }));
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  };
   return (
     <>
       <Header />
@@ -122,25 +139,20 @@ export default function AddQuestion() {
           <Divider color={"primary"} />
 
           <FormControl>
-            <label>Tags</label>
-            <Input
-              name="tags"
-              value={newQuestion?.tags}
-              type="search"
-              placeholder="Search for tags Here"
-              onChange={handleInputChanges}
-            />{" "}
-            <br />
-          </FormControl>
-          <FormControl>
-            <label>Image</label>
-            <Input
-              type="file"
-              name="thumbnail"
-              placeholder="Upload Question Image"
-            />{" "}
-            <br />
-          </FormControl>
+        <label>Tags</label>
+        <Input
+          name="tags"
+          value={newQuestion.tags[0]}
+          type="search"
+          placeholder="Search for tags Here"
+          onChange={handleTagsChange}
+        />{" "}
+        <br />
+      </FormControl>
+      <FormControl>
+        <label>Image</label>
+        <Input type="file" name="thumbnail" onChange={handleFileChange} /> <br />
+      </FormControl>
 
           <Divider color={"primary"} />
 

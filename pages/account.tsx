@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { supabase } from "../lib/supabaseClient";
 import { AccountAvatar } from "./components";
 import { Nav, Header } from "./components";
@@ -12,44 +12,68 @@ import {
   Divider,
 } from "@mui/material";
 
-export default function Account({ session, user }) {
-  const [loading, setLoading] = useState(true);
-  const [username, setUsername] = useState(null);
-  const [website, setWebsite] = useState(null);
-  const [avatar_url, setAvatarUrl] = useState(null);
+interface Session {
+  user: {
+    email: string;
+  };
+}
 
-  //console.log(avatar_url);
+interface User {
+  id: string;
+}
+
+interface ProfileData {
+  username: string | null;
+  website: string | null;
+  avatar_url: string | null;
+}
+
+interface UpdateProfileParams {
+  username: string | null;
+  website: string | null;
+  avatar_url: string | null;
+}
+
+interface Props {
+  session: Session | null;
+  user: User | null;
+}
+
+export default function Account({ session, user }: Props) {
+  const [loading, setLoading] = useState<boolean>(true);
+  const [username, setUsername] = useState<string | null>(null);
+  const [website, setWebsite] = useState<string | null>(null);
+  const [avatar_url, setAvatarUrl] = useState<string | null>(null);
 
   useEffect(() => {
-    getProfile();
+    if (session) {
+      getProfile();
+    }
   }, [session]);
 
   async function getCurrentUser() {
-    const {
-      data: { session },
-      error,
-    } = await supabase.auth.getSession();
+    const { data, error } = await supabase.auth.getSession();
 
     if (error) {
       throw error;
     }
 
-    if (!session?.user) {
+    if (!data?.user) {
       throw new Error("User not logged in");
     }
 
-    return session.user;
+    return data.user;
   }
 
   async function getProfile() {
     try {
       setLoading(true);
-      const user = await getCurrentUser();
+      const currentUser = await getCurrentUser();
 
-      let { data, error, status } = await supabase
-        .from("profiles")
+      const { data, error, status } = await supabase
+        .from<ProfileData>("profiles")
         .select(`username, website, avatar_url`)
-        .eq("id", user.id)
+        .eq("id", currentUser.id)
         .single();
 
       if (error && status !== 406) {
@@ -60,7 +84,6 @@ export default function Account({ session, user }) {
         setUsername(data.username);
         setWebsite(data.website);
         setAvatarUrl(data.avatar_url);
-      } else {
       }
     } catch (error) {
       alert(error.message);
@@ -69,20 +92,20 @@ export default function Account({ session, user }) {
     }
   }
 
-  async function updateProfile({ username, website, avatar_url }) {
+  async function updateProfile({ username, website, avatar_url }: UpdateProfileParams) {
     try {
       setLoading(true);
-      const user = await getCurrentUser();
+      const currentUser = await getCurrentUser();
 
       const updates = {
-        id: user.id,
+        id: currentUser.id,
         username,
         website,
         avatar_url,
         updated_at: new Date(),
       };
 
-      let { error } = await supabase.from("profiles").upsert(updates);
+      const { error } = await supabase.from("profiles").upsert(updates);
 
       if (error) {
         throw error;
@@ -112,9 +135,11 @@ export default function Account({ session, user }) {
               <AccountAvatar
                 url={avatar_url}
                 size={150}
-                onUpload={(url) => {
+                onUpload={(url: string) => {
                   setAvatarUrl(url);
-                  updateProfile({ username, website, avatar_url: url });
+                  if (username !== null && website !== null) {
+                    updateProfile({ username, website, avatar_url: url });
+                  }
                 }}
               />
             </FormControl>
@@ -152,7 +177,11 @@ export default function Account({ session, user }) {
 
           <FormControl>
             <Button
-              onClick={() => updateProfile({ username, website, avatar_url })}
+              onClick={() => {
+                if (username !== null && website !== null && avatar_url !== null) {
+                  updateProfile({ username, website, avatar_url });
+                }
+              }}
               disabled={loading}
               variant="outlined"
             >
