@@ -3,23 +3,27 @@ markdownCopy code
 # 🚀 StackOverFlow Clone in Next.js, Redux & Supabase.
 
 ## 📋 TODOS
+
 - MATCH profiles to Questions
 - MATCH Each Question to Tags using question_tags
 - DISPLAY USER AVATAR FROM SUPABASE IN NAVBAR
 
 ## 🚀 Start By
+
 Run `yarn dev`
 
 ### 📦 Packages Installed
+
 1. [Quickstart - Supabase js](https://supabase.com/docs/guides/with-nextjs)
 2. [@supabase/supabase-js](https://yarnpkg.com/package/@supabase/supabase-js)
+
 ```sh
    yarn add @supabase/supabase-js
 ```
 
 1.  [@supabase/auth-helpers-nextjs](https://yarnpkg.com/package/@supabase/auth-helpers-nextjs)
 
-```sh 
+```sh
 yarn add @supabase/auth-helpers-nextjs
 ```
 
@@ -27,9 +31,9 @@ yarn add @supabase/auth-helpers-nextjs
 
 ### 📖 NextJS Docs
 
--   [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
--   [Nested Middleware - Next.js Documentation](https://nextjs.org/docs/messages/nested-middleware)
--   [Existing projects migrate from JS to TS](https://nextjs.org/docs/basic-features/typescript)
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Nested Middleware - Next.js Documentation](https://nextjs.org/docs/messages/nested-middleware)
+- [Existing projects migrate from JS to TS](https://nextjs.org/docs/basic-features/typescript)
 
 ### 📚 References
 
@@ -53,6 +57,7 @@ yarn add @supabase/auth-helpers-nextjs
         );
         return num_affected;
 
+    ```
 
 5.  [Supabase in Next.js returning an empty array when data is in relevant tables](https://stackoverflow.com/questions/71294440/supabase-in-next-js-returning-an-empty-array-when-data-is-in-relevant-tables)
 
