@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { Nav, Header } from "./components/index";
 import { supabase } from "../lib/supabaseClient";
 import {
@@ -64,46 +64,29 @@ export default function AddQuestion() {
 
       alert(data + "Has Been added Sucessfully");
     } catch (error) {
-      console.log(error);
+      console.error(`Error has been found ${error}`);
     }
   };
 
- 
-
-  const handleInputChanges = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChanges = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    //HANDLE INPUTS WITH EVENT name HTML5 property✔️
     setNewQuestion((previous) => ({
       ...previous,
       [event.target.name]: event.target.value,
     }));
+    //PASS THIS ARROW FUNCTION To onChange={handleInputChanges} on each Input✔️
   };
 
-  const handleTagsChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setNewQuestion((previous) => ({
-      ...previous,
-      tags: [event.target.value],
-    }));
-  };
-
-  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setNewQuestion((previous) => ({
-          ...previous,
-          thumbnail: e.target?.result as string,
-        }));
-      };
-      reader.readAsDataURL(event.target.files[0]);
-    }
-  };
   return (
     <>
       <Header />
       <Nav url={undefined} size={undefined} session={undefined} />
       <Container fixed maxWidth="md">
-        <FormGroup>
-          <h1>Add Question</h1>
+        <h1>Add Question</h1>
 
+        <FormGroup>
           <FormControl>
             <label>Question Title</label>
             <Input
@@ -121,8 +104,13 @@ export default function AddQuestion() {
             <Input
               type="text"
               name="description"
+              value={newQuestion.description}
               placeholder="Description"
-            />{" "}
+              onChange={handleInputChanges}
+              required
+              color="primary"
+
+            />
             <br />
           </FormControl>
 
@@ -139,29 +127,35 @@ export default function AddQuestion() {
           <Divider color={"primary"} />
 
           <FormControl>
-        <label>Tags</label>
-        <Input
-          name="tags"
-          value={newQuestion.tags[0]}
-          type="search"
-          placeholder="Search for tags Here"
-          onChange={handleTagsChange}
-        />{" "}
-        <br />
-      </FormControl>
-      <FormControl>
-        <label>Image</label>
-        <Input type="file" name="thumbnail" onChange={handleFileChange} /> <br />
-      </FormControl>
+            <label>Tags</label>
+            <Input
+              color="primary"
+              name="tags"
+              value={newQuestion?.tags}
+              type="search"
+              placeholder="Search for tags Here"
+              onChange={handleInputChanges}
+            />{" "}
+            <br />
+          </FormControl>
+          <FormControl>
+            <label>Image</label>
+            <Input
+              type="file"
+              name="thumbnail"
+              placeholder="Upload Question Image"
+            />{" "}
+            <br />
+          </FormControl>
 
           <Divider color={"primary"} />
 
-          <Button color="primary" type="submit" variant="outlined">
+          <Button color="primary" type="submit" variant="outlined" onClick={createQuestions}>
             <Fingerprint />
             <Typography>Add Question</Typography>
           </Button>
         </FormGroup>
-        <Button onClick={createQuestions}>createQuestions</Button>
+     
       </Container>
     </>
   );
