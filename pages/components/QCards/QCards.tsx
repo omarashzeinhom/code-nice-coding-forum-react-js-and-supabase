@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-//import Image from "next/image";
 import { supabase } from "../../../lib/supabaseClient";
 //MUI
 import { styled } from "@mui/material/styles";
@@ -34,18 +33,19 @@ interface Question {
   // Add other fields as needed
 }
 
-const ExpandMore = styled(({ expand, ...other }: { expand: boolean; [key: string]: any }) => (
-  <IconButton {...other}>
-    <ExpandMoreIcon />
-  </IconButton>
-))(({ theme, expand }: { theme: any; expand: boolean }) => ({
+const ExpandMore = styled(
+  ({ expand, ...other }: { expand: boolean; [key: string]: any }) => (
+    <IconButton {...other}>
+      <ExpandMoreIcon />
+    </IconButton>
+  )
+)(({ theme, expand }: { theme: any; expand: boolean }) => ({
   transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
   marginLeft: "auto",
   transition: theme.transitions.create("transform", {
     duration: theme.transitions.duration.shortest,
   }),
 }));
-
 
 const Item = styled(Card)(({ theme }: { theme: any }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -56,14 +56,14 @@ const Item = styled(Card)(({ theme }: { theme: any }) => ({
 }));
 
 export default function QCards() {
-  //GUI
+  // GUI
   const [expandedIndex, setExpandedIndex] = useState(-1); // Initialize with -1 for no expanded item
 
   const handleExpandClick = (index: number) => {
     setExpandedIndex(index === expandedIndex ? -1 : index);
   };
 
-  //LOGIC
+  // LOGIC
   const [questions, setQuestions] = useState<Question[]>([]);
 
   async function fetchQuestions() {
@@ -93,16 +93,7 @@ export default function QCards() {
                 <CardHeader
                   avatar={
                     <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                      {/*
-                    <Image
-                      src={question?.userAvatarLink }
-                      alt={question?.userName }
-                      width={"75px"}
-                      height={"75px"}
-                      loading="lazy"
-                    />
-                    
-                    */}
+                      {/* ADD IMAGE HERE */}
                     </Avatar>
                   }
                   action={
@@ -155,7 +146,6 @@ export default function QCards() {
                 </Collapse>
               </Item>
             </Grid>
-
             <Divider />
           </React.Fragment>
         );
