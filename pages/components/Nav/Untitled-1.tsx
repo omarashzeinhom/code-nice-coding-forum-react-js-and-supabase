@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { supabase } from "../../../lib/supabaseClient";
-
 import {
   AppBar,
   Toolbar,
@@ -37,30 +35,52 @@ interface NavProps {
   session?: any;
 }
 
-export default function Nav({url, size, session}: NavProps) {
-  //GUI ANCHORS
+export default function Nav({ url, size, session }: NavProps) {
+  // GUI ANCHORS
   const [anchorElNav, setAnchorElNav] = useState<HTMLElement | null>(null);
   const [anchorElUser, setAnchorElUser] = useState<HTMLElement | null>(null);
-  
 
- // OPEN NAV
- const handleOpenNav = (event: React.MouseEvent<HTMLElement>) => {
-  setAnchorElNav(event.currentTarget);
-};
+  // OPEN NAV
+  const handleOpenNav = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElNav(event.currentTarget);
+  };
 
   // CLOSE NAV
   const handleCloseNav = () => {
     setAnchorElNav(null);
   };
 
-  //OPEN USER SETTINGS
+  // OPEN USER SETTINGS
   const handleOpenUserSettings = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
+
   // CLOSE USER SETTINGS
   const handleCloseUserSettings = () => {
     setAnchorElUser(null);
   };
+
+  const pages: Page[] = [
+    {
+      pageLink: "/questions",
+      pageLabel: "Questions",
+    },
+    {
+      pageLink: "/tags",
+      pageLabel: "Tags",
+    },
+  ];
+
+  const userSettings: UserSetting[] = [
+    {
+      settingLink: "/addquestion",
+      settingLabel: "Add Question",
+    },
+    {
+      settingLink: "/account",
+      settingLabel: "Account",
+    },
+  ];
 
   return (
     <AppBar position="static">
@@ -101,14 +121,17 @@ export default function Nav({url, size, session}: NavProps) {
             >
               {/**PAGES */}
               {pages.map((page, pageIndex) => (
-                <MenuItem onClick={handleCloseNav} key={ pageIndex}>
-                  <Link href={page?.pageLink}>
-                    <h1>{page?.pageLabel}</h1>
+                <MenuItem onClick={handleCloseNav} key={pageIndex}>
+                  <Link href={page.pageLink}>
+                    <Typography variant="h6" component="div">
+                      {page.pageLabel}
+                    </Typography>
                   </Link>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
+
           <IntegrationInstructionsIcon
             sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
           />
@@ -130,35 +153,34 @@ export default function Nav({url, size, session}: NavProps) {
           </Typography>
 
           <Box
-  sx={{
-    flexGrow: 1,
-    letterSpacing: 4,
-    m: 1,
-    display: { xs: "none", md: "flex" },
-  }}
->
-  {/**PAGES */}
-  {pages.map((page, pageIndex) => (
-    <React.Fragment key={pageIndex}>
-      <Link href={page?.pageLink}>
-        <Typography
-          variant="h6"
-          component="div"
-          sx={{ cursor: "pointer", mx: 2 }}
-        >
-          {page.pageLabel}
-        </Typography>
-      </Link>
-      {/* Add space between tags */}
-      {pageIndex < pages.length - 1 && (
-        <Typography variant="h6" component="div" sx={{ mx: 2 }}>
-          {" "}
-          {/* Add a space here */}
-        </Typography>
-      )}
-    </React.Fragment>
-  ))}
-</Box>
+            sx={{
+              flexGrow: 1,
+              letterSpacing: 4,
+              m: 1,
+              display: { xs: "none", md: "flex" },
+            }}
+          >
+            {pages.map((page, pageIndex) => (
+              <React.Fragment key={pageIndex}>
+                <Link href={page.pageLink}>
+                  <Typography
+                    variant="h6"
+                    component="div"
+                    sx={{ cursor: "pointer", mx: 2 }}
+                  >
+                    {page.pageLabel}
+                  </Typography>
+                </Link>
+                {/* Add space between tags */}
+                {pageIndex < pages.length - 1 && (
+                  <Typography variant="h6" component="div" sx={{ mx: 2 }}>
+                    {" "}
+                    {/* Add a space here */}
+                  </Typography>
+                )}
+              </React.Fragment>
+            ))}
+          </Box>
 
           {/**USER SETTINGS */}
           <Box sx={{ flexGrow: 0 }}>
@@ -185,10 +207,10 @@ export default function Nav({url, size, session}: NavProps) {
               onClose={handleCloseUserSettings}
             >
               {userSettings.map((setting, settingsIndex) => (
-                <Link href={setting?.settingLink} key={settingsIndex}>
+                <Link href={setting.settingLink} key={settingsIndex}>
                   <MenuItem>
                     <Typography textAlign="center">
-                      {setting?.settingLabel}
+                      {setting.settingLabel}
                     </Typography>
                   </MenuItem>
                 </Link>
@@ -203,26 +225,3 @@ export default function Nav({url, size, session}: NavProps) {
     </AppBar>
   );
 }
-
-
-const pages: Page[] = [
-  {
-    pageLink: "/questions",
-    pageLabel: "Questions",
-  },
-  {
-    pageLink: "/tags",
-    pageLabel: "Tags",
-  },
-];
-
-const userSettings: UserSetting[] = [
-  {
-    settingLink: "/addquestion",
-    settingLabel: "Add Question",
-  },
-  {
-    settingLink: "/account",
-    settingLabel: "Account",
-  },
-];
