@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Nav, Header } from "./components/index";
-import { supabase } from "../utils/supabaseClient";
-
+import { supabase } from "../lib/supabaseClient";
 import {
   FormControl,
   Input,
@@ -15,20 +14,28 @@ import {
 
 import Fingerprint from "@mui/icons-material/Fingerprint";
 
+interface addQuestionProps {
+  title: string;
+  description: string;
+  body: string;
+  thumbnail: string;
+  created_at: Date;
+  tags: [string];
+  question_tags: [string];
+}
+
 export default function AddQuestion() {
-  const [newQuestion, setNewQuestion] = useState(
-    {
-      title: " ",
-      description: " ",
-      body: "",
-      thumbnail: " ",
-      created_at: new Date(),
-      tags: [""],
-      question_tags: [""],
-      //TODO MATCH USER WITH USER ID OR USERNAME
-      //TODO INSERT IMAGE HERE
-    },
-  );
+  const [newQuestion, setNewQuestion] = useState({
+    title: " ",
+    description: " ",
+    body: "",
+    thumbnail: " ",
+    created_at: new Date(),
+    tags: [""],
+    question_tags: [""],
+    //TODO MATCH USER WITH USER ID OR USERNAME
+    //TODO INSERT IMAGE HERE
+  });
 
   //DEBUG AND HANDLE PROPS PASSED ✔️
   console.log(
@@ -41,25 +48,21 @@ export default function AddQuestion() {
       "tags are >>> =" +
       newQuestion?.tags +
       "question_tags are >>>> = " +
-      newQuestion?.question_tags,
-    
+      newQuestion?.question_tags
   );
 
   //TODO FIX 200 CODE ERROR
   const createQuestions = async () => {
     try {
-      const { data, error } = await supabase.from("questions").insert(
-        {
-          title: newQuestion?.title,
-          description: newQuestion?.description,
-          body: newQuestion?.body,
-          thumbnail: JSON.stringify(newQuestion?.thumbnail),
-          created_at: new Date(),
-          tags: newQuestion?.tags,
-          question_tags: newQuestion?.tags,
-         
-        },
-      );
+      const { data, error } = await supabase.from("questions").insert({
+        title: newQuestion?.title,
+        description: newQuestion?.description,
+        body: newQuestion?.body,
+        thumbnail: JSON.stringify(newQuestion?.thumbnail),
+        created_at: new Date(),
+        tags: newQuestion?.tags,
+        question_tags: newQuestion?.tags,
+      });
 
       alert(data + "Has Been added Sucessfully");
     } catch (error) {

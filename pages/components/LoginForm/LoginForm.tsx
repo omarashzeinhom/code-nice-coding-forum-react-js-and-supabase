@@ -3,7 +3,7 @@ import IconButton from "@mui/material/IconButton";
 import Fingerprint from "@mui/icons-material/Fingerprint";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { grey } from "@mui/material/colors";
-import { supabase } from "../../../utils/supabaseClient";
+import { supabase } from "../../../lib/supabaseClient";
 import { withPageAuth } from '@supabase/auth-helpers-nextjs'
 
 import {
